@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@42kim/eslint-config-typescript@^0.1.1":
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/@42kim/eslint-config-typescript/-/eslint-config-typescript-0.1.1.tgz#d32201ab88b40502f0c6f115fc5be7c6cb62afb5"
+  integrity sha512-IRMHe79jB0AMxC8K0UcQ4PhGmllX2/QF7FdAKGr5slhQNt2qoWcGT/lwgyN5Rf+TPtKlDJgEaJ89Mck5jwZu+A==
+
 "@babel/runtime@^7.20.7":
   version "7.21.0"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.21.0.tgz#5b55c9d394e5fcf304909a8b00c07dc217b56673"
