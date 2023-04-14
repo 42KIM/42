@@ -20,7 +20,7 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
-    "@42kim/eslint-config-typescript": "^0.2.1",
+    "@42kim/eslint-config-typescript": "^0.3.1",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "autoprefixer": "^10.4.14",
     "postcss": "^8.4.21",
