@@ -1,3 +1,3 @@
 export {
-  default
+  default,
 } from '@/components/pages/about';
