@@ -1,9 +1,16 @@
 import Layout from '@/components/layout';
 import '@/styles/globals.css';
+import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
-export default function App({ Component, pageProps }: AppProps) {
+type PageComponentWithProps = NextPage & {
+  getLayoutProps?: () => Parameters<typeof Layout>[0],
+};
+
+export default function App({ Component, pageProps }: AppProps & { Component: PageComponentWithProps }) {
+  const layoutProps = Component.getLayoutProps?.() || {};
+
   return (
     <>
       <Head>
@@ -12,9 +19,9 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
+      <Layout {...layoutProps}>
         <Component {...pageProps} />
       </Layout>
     </>
-  )
+  );
 }
