@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const Home = () => {
   return (
@@ -6,7 +6,13 @@ const Home = () => {
       <Link href="/about">ABOUT</Link>
       <Link href="/posts">POSTS</Link>
     </div>
-  )
-}
+  );
+};
+
+Home.getLayoutProps = () => {
+  return {
+    showGnb: false,
+  };
+};
 
 export default Home;
