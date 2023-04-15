@@ -1,11 +1,30 @@
 import Link from 'next/link';
-import { menus } from './menus';
+
+type Menu = {
+  name: string,
+  path: string,
+};
+
+export const menus: Menu[] = [
+  {
+    name: 'Home',
+    path: '/',
+  },
+  {
+    name: 'About',
+    path: '/about',
+  },
+  {
+    name: 'Posts',
+    path: '/posts',
+  },
+];
 
 const Gnb = () => {
   return (
-    <header className="h-20 flex justify-center bg-blue-200">
-      <div className="w-full max-w-2xl flex justify-between">
-        <div className="flex gap-10 items-center">
+    <header className="flex h-20 justify-center bg-blue-200">
+      <div className="flex w-full max-w-2xl justify-between">
+        <div className="flex items-center gap-10">
           {menus.map(({ name, path }) => (
             <Link key={name} href={path}>
               <span>{name}</span>
