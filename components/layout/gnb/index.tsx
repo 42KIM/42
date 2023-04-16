@@ -22,7 +22,7 @@ export const menus: Menu[] = [
 
 const Gnb = () => {
   return (
-    <header className="flex h-20 justify-center bg-blue-200">
+    <header className="absolute w-screen flex h-20 justify-center bg-blue-200">
       <div className="flex w-full max-w-2xl justify-between">
         <div className="flex items-center gap-10">
           {menus.map(({ name, path }) => (
