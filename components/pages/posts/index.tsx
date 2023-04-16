@@ -1,12 +1,12 @@
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const Posts = () => {
+  const router = useRouter();
+
   return (
     <div>
-      <Link href="/posts/create">
-        this is posts page!
-        <button>글쓰기</button>
-      </Link>
+      this is posts page!
+      <button onClick={() => router.push('/posts/create')}>글쓰기</button>
     </div>
   );
 };
