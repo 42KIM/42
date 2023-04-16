@@ -9,7 +9,7 @@ const Layout = ({ children, showGnb = true }: PropsWithChildren<LayoutProps>) =>
   return (
     <>
       {showGnb && <Gnb />}
-      <main className="max-w-2xl h-full m-auto pt-20 px-5">
+      <main className="max-w-2xl h-full m-auto pt-24 px-5">
         {children}
       </main>
     </>
