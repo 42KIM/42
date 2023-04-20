@@ -3,15 +3,15 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import 'prismjs/themes/prism.css';
 import Prism from 'prismjs';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import { Viewer } from '@toast-ui/react-editor';
+import { Viewer as TuiViewer } from '@toast-ui/react-editor';
 
-const TuiViewer = ({ content }) => {
+const EditorViewer = ({ content }) => {
   return (
-    <Viewer
+    <TuiViewer
       initialValue={content}
       plugins={[ [ codeSyntaxHighlight, { highlighter: Prism } ] ]}
     />
   );
 };
 
-export default TuiViewer;
+export default EditorViewer;
