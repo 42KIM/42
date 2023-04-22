@@ -19,17 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     const parsedToken = accessToken.split('&')[0].split('=')[1];
 
-    const { data: userInfo } = await _request({
-      method: 'GET',
-      url: 'https://api.github.com/user',
-      headers: {
-        Authorization: `Bearer ${parsedToken}`,
-      },
-    });
-    console.log(userInfo);
-    //TODO - save token
-    //TODO - save user
-
+    res.setHeader('Set-Cookie', `token=${parsedToken}; path=/;`);
     res.status(200).end();
   }
 }
