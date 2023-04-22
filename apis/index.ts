@@ -23,4 +23,12 @@ export const APIService = {
       data: payload,
     });
   },
+  getUser: async () => {
+    const { data } = await _request({
+      method: 'GET',
+      url: '/api/user',
+    });
+
+    return data;
+  },
 };
