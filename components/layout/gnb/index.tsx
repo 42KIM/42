@@ -6,6 +6,8 @@ type Menu = {
   adminOnly: boolean,
 };
 
+const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
+
 export const menus: Menu[] = [
   {
     name: 'Home',
@@ -30,7 +32,6 @@ export const menus: Menu[] = [
 ];
 
 const Gnb = () => {
-  //TODO - 인증 추가
   const isAdmin = true;
 
   return (
@@ -47,6 +48,9 @@ const Gnb = () => {
             }
           })}
         </div>
+        <a href={`https://github.com/login/oauth/authorize?scope=user&client_id=${GITHUB_CLIENT_ID}&redirect_url=http://localhost:3000/auth/callback`}>
+        로그인
+        </a>
       </div>
     </header>
   );

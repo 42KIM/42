@@ -16,4 +16,11 @@ export const APIService = {
       data: payload,
     });
   },
+  createToken: async (payload) => {
+    await _request({
+      method: 'POST',
+      url: '/api/auth',
+      data: payload,
+    });
+  },
 };
