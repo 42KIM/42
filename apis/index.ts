@@ -19,7 +19,7 @@ export const APIService = {
   createToken: async (payload) => {
     await _request({
       method: 'POST',
-      url: '/api/auth',
+      url: '/api/auth/token-create',
       data: payload,
     });
   },
@@ -30,5 +30,11 @@ export const APIService = {
     });
 
     return data;
+  },
+  signOut: async () => {
+    await _request({
+      method: 'GET',
+      url: '/api/auth/sign-out',
+    });
   },
 };
