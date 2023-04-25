@@ -1,11 +1,14 @@
 import type { PropsWithChildren } from 'react';
 import Gnb from './gnb';
+import { useAuthentication } from '@/lib/auth.service';
 
 type LayoutProps = {
   showGnb?: boolean,
 };
 
 const Layout = ({ children, showGnb = true }: PropsWithChildren<LayoutProps>) => {
+  useAuthentication();
+
   return (
     <>
       {showGnb && <Gnb />}
