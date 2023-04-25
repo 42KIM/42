@@ -14,7 +14,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           Authorization: `Bearer ${token}`,
         },
       });
-      res.status(200).json(data);
+
+      res.status(200).json(Object.assign(data, {
+        isAdmin: data.login === '42KIM',
+      }));
     } catch (error) {
       // TODO - 에러 처리
       res.status(401).end();
