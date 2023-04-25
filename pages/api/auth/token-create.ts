@@ -20,7 +20,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const parsedToken = accessToken.split('&')[0].split('=')[1];
 
     // TODO - 쿠키 설정 (expire, secure, domain ...)
-    res.setHeader('Set-Cookie', `token=${parsedToken}; path=/; HttpOnly`);
+    res.setHeader('Set-Cookie', `token=${parsedToken}; path=/`);
     res.status(200).end();
   }
 }
