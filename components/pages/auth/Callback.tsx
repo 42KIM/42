@@ -1,22 +1,25 @@
 import { APIService } from '@/apis';
+import { accessCookieAtom, parseAccessCookie } from '@/lib/access-cookie';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { useSetRecoilState } from 'recoil';
 
 const AuthCallback = () => {
   const { push, query } = useRouter();
-
+  const setAccessCookie = useSetRecoilState(accessCookieAtom);
   useEffect(() => {
     if (!query.code) return;
 
     const login = async () => {
       await APIService.createToken({ code: query.code });
-      const userInfo = await APIService.getUser();
-      // TODO - 글로벌 스토어로 유저 세션 관리
+      const accessCookie = parseAccessCookie();
+      setAccessCookie(accessCookie);
       // TODO - destination으로 돌려보내기
       push('/');
     };
+
     login();
-  }, [ query.code, push ]);
+  }, [ query.code, push, setAccessCookie ]);
 
   return <div>Authentication Processing...</div>;
 };
