@@ -16,6 +16,13 @@ export const APIService = {
       data: payload,
     });
   },
+  deletePosts: async (payload) => {
+    await _request({
+      method: 'DELETE',
+      url: '/api/posts',
+      data: payload,
+    });
+  },
   createToken: async (payload) => {
     await _request({
       method: 'POST',
