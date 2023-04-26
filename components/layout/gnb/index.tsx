@@ -1,9 +1,11 @@
 import { APIService } from '@/apis';
 import { accessCookieAtom } from '@/lib/access-cookie';
 import { useIsSignedIn, useUser } from '@/lib/auth.service';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
+import githubLogo from '@/public/github-mark-white.svg';
 
 type Menu = {
   name: string,
@@ -67,11 +69,14 @@ const Gnb = () => {
           })}
         </div>
         <div className='flex items-center gap-2'>
-          {user
-            ? <div>Hello, {user.login}!</div>
-            : <button onClick={handleSignIn}>로그인</button>
+          <Image src={githubLogo} alt='login' width={18} />
+          {user ?
+            <span className='text-sm text-white'>{user.login}</span> :
+            <button onClick={handleSignIn}>
+              <span className='text-sm text-white'>Login with Github</span>
+            </button>
           }
-          {isSignedIn && <button onClick={handleSignOut}>로그아웃</button>}
+          {isSignedIn && <button className='text-sm text-white' onClick={handleSignOut}>로그아웃</button>}
         </div>
       </div>
     </header>
