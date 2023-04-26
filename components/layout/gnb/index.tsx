@@ -2,6 +2,7 @@ import { APIService } from '@/apis';
 import { accessCookieAtom } from '@/lib/access-cookie';
 import { useIsSignedIn, useUser } from '@/lib/auth.service';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 
 type Menu = {
@@ -36,11 +37,17 @@ export const menus: Menu[] = [
 ];
 
 const Gnb = () => {
+  const router = useRouter();
   const user = useUser();
   const isSignedIn = useIsSignedIn();
   const setAccessCookie = useSetRecoilState(accessCookieAtom);
 
-  const handleLogout = async () => {
+  const handleSignIn = () => {
+    const redirectPath = router.asPath;
+    router.push(`${githubLoginUrl}&state=${redirectPath}`);
+  };
+
+  const handleSignOut = async () => {
     await APIService.signOut();
     setAccessCookie(null);
   };
@@ -62,9 +69,9 @@ const Gnb = () => {
         <div className='flex items-center gap-2'>
           {user
             ? <div>Hello, {user.login}!</div>
-            : <a href={githubLoginUrl}>로그인</a>
+            : <button onClick={handleSignIn}>로그인</button>
           }
-          {isSignedIn && <button onClick={handleLogout}>로그아웃</button>}
+          {isSignedIn && <button onClick={handleSignOut}>로그아웃</button>}
         </div>
       </div>
     </header>

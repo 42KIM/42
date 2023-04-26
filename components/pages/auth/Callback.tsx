@@ -4,22 +4,27 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
+const isValidPath = (state: string | string[] | undefined): state is string => typeof state === 'string';
+
 const AuthCallback = () => {
   const { push, query } = useRouter();
   const setAccessCookie = useSetRecoilState(accessCookieAtom);
+
   useEffect(() => {
     if (!query.code) return;
 
     const login = async () => {
       await APIService.createToken({ code: query.code });
+
       const accessCookie = parseAccessCookie();
+      const redirectPath = query.state || '/';
+
       setAccessCookie(accessCookie);
-      // TODO - destination으로 돌려보내기
-      push('/');
+      push(isValidPath(redirectPath) ? redirectPath : '/');
     };
 
     login();
-  }, [ query.code, push, setAccessCookie ]);
+  }, [ query, push, setAccessCookie ]);
 
   return <div>Authentication Processing...</div>;
 };
