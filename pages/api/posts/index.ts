@@ -33,4 +33,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(200).end();
     // TODO - 삭제 제대로 안 됐을 때 에러 처리
   }
+
+  // TODO - 수정 API
 }
