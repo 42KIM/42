@@ -3,18 +3,22 @@ import { accessCookieAtom, parseAccessCookie } from './access-cookie';
 import { useEffect, useState } from 'react';
 import { APIService } from '@/apis';
 
+type User = {
+  login: string,
+  isAdmin: boolean,
+};
+
 export const isSignedInAtom = atom<boolean>({
   key: 'isSignedIn',
   default: false,
 });
 
-export const userAtom = atom({
+export const userAtom = atom<User | null>({
   key: 'user',
   default: null,
 });
 
-// TODO - type
-export const useUser = () => useRecoilValue(userAtom);
+export const useUser = () => useRecoilValue<User | null>(userAtom);
 
 export const useIsSignedIn = () => {
   const [ isSignedIn, setIsSignedIn ] = useState(false);
