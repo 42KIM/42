@@ -16,7 +16,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       });
 
       res.status(200).json(Object.assign(data, {
-        isAdmin: data.login === '42KIM',
+        isAdmin: data.login === process.env.GITHUB_ADMIN_USER,
       }));
     } catch (error) {
       // TODO - 에러 처리
