@@ -1,14 +1,13 @@
-import clientPromise from '@/lib/mongodb';
+import dbConnect from '@/lib/mongoose';
+import Posts from '@/models/Posts';
 
 export { default } from '@/components/pages/posts';
 
 export const getServerSideProps = async () => {
-  const client = await clientPromise;
-  const results = await client.db('42_blog')
-    .collection('posts')
-    .find({})
-    .limit(10)
-    .toArray();
+  await dbConnect();
+
+  const results = await Posts.find({})
+    .limit(10);
 
   return {
     props: {
