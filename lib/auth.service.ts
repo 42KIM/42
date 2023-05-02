@@ -35,7 +35,6 @@ export const useAuthentication = () => {
   const parsedAccessCookie = parseAccessCookie();
   const [ accessCookie, setAccessCookie ] = useRecoilState(accessCookieAtom);
   const setUser = useSetRecoilState(userAtom);
-  const setIsSignedIn = useSetRecoilState(isSignedInAtom);
 
   useEffect(() => {
     if (parsedAccessCookie === null) {
@@ -51,5 +50,5 @@ export const useAuthentication = () => {
     };
     // TODO - fix 중복호출
     initUser();
-  }, [ parsedAccessCookie, accessCookie, setUser, setAccessCookie, setIsSignedIn ]);
+  }, [ parsedAccessCookie, accessCookie, setUser, setAccessCookie ]);
 };
