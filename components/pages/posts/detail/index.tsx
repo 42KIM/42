@@ -22,9 +22,11 @@ const PostDetail = (props) => {
 
   return (
     <div>
-      <Link href={'/posts'}>Back</Link>
-      {user?.isAdmin && <button onClick={handleClick}>삭제</button>}
-      <div>
+      <div className='flex justify-between text-sm text-blue-300'>
+        <Link href={'/posts'}><button>◀️ 목록</button></Link>
+        {user?.isAdmin && <button onClick={handleClick}>삭제하기</button>}
+      </div>
+      <div className='py-2'>
         <span>{post.title}</span>
         <div>
           <EditorViewer content={post.content} />
