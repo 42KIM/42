@@ -1,4 +1,4 @@
-import { atom, useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom, useRecoilState, useRecoilValue } from 'recoil';
 import { accessCookieAtom, parseAccessCookie } from './access-cookie';
 import { useEffect, useState } from 'react';
 import { APIService } from '@/apis';
@@ -34,13 +34,14 @@ export const useIsSignedIn = () => {
 export const useAuthentication = () => {
   const parsedAccessCookie = parseAccessCookie();
   const [ accessCookie, setAccessCookie ] = useRecoilState(accessCookieAtom);
-  const setUser = useSetRecoilState(userAtom);
+  const [ user, setUser ] = useRecoilState(userAtom);
 
   useEffect(() => {
     if (parsedAccessCookie === null) {
-      setUser(null);
+      user && setUser(null);
       return;
     }
+    if (user && (parsedAccessCookie === accessCookie)) return;
 
     setAccessCookie(parsedAccessCookie);
 
@@ -48,7 +49,6 @@ export const useAuthentication = () => {
       const user = await APIService.getUser();
       setUser(user);
     };
-    // TODO - fix 중복호출
     initUser();
-  }, [ parsedAccessCookie, accessCookie, setUser, setAccessCookie ]);
+  }, [ parsedAccessCookie, accessCookie, user, setUser, setAccessCookie ]);
 };
