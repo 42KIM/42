@@ -2,7 +2,7 @@ import dbConnect from '@/lib/mongoose';
 import Posts from '@/models/Posts';
 import { ObjectId } from 'mongodb';
 
-export { default } from '@/components/pages/posts/post/Detail';
+export { default } from '@/components/pages/posts/post';
 
 export const getStaticPaths = async () => {
   await dbConnect();
