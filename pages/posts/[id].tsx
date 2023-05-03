@@ -1,14 +1,13 @@
-import clientPromise from '@/lib/mongodb';
+import dbConnect from '@/lib/mongoose';
+import Posts from '@/models/Posts';
 import { ObjectId } from 'mongodb';
 
 export { default } from '@/components/pages/posts/detail';
 
 export const getStaticPaths = async () => {
-  const client = await clientPromise;
-  const results = await client.db('42_blog')
-    .collection('posts')
-    .find({})
-    .toArray();
+  await dbConnect();
+
+  const results = await Posts.find({});
 
   return {
     paths: results.map(({ _id }) => ({ params: { id: _id.toString() } })),
@@ -17,14 +16,10 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async (context) => {
-  const { id } = context.params;
+  await dbConnect();
 
-  const client = await clientPromise;
-  const result = await client.db('42_blog')
-    .collection('posts')
-    .findOne({
-      _id: new ObjectId(id),
-    });
+  const { id } = context.params;
+  const result = await Posts.findOne({ _id: new ObjectId(id) });
 
   return {
     props: {
