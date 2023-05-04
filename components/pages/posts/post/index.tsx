@@ -16,12 +16,6 @@ const PostPage = ({ post }: PostPageProps) => {
   const user = useUser();
   const [ pageMode, setPageMode ] = useState<'detail' | 'edit'>('detail');
 
-  const handleEdit = async () => {
-    // call api
-    // on Success
-    setPageMode('detail');
-  };
-
   const handleDelete = async () => {
     await APIService.deletePosts({ _id: post._id });
     alert('삭제되었습니다.');
@@ -40,14 +34,16 @@ const PostPage = ({ post }: PostPageProps) => {
               ? <button onClick={() => {
                 setPageMode('edit');
               }}>수정하기</button>
-              : <button onClick={handleEdit}>수정완료</button>
+              : <button onClick={() => {
+                setPageMode('detail');
+              }}>취소</button>
             }
             <button onClick={handleDelete}>삭제하기</button>
           </div>
         )}
       </div>
       {pageMode === 'detail' && <PostDetail post={post} />}
-      {pageMode === 'edit' && <PostEdit />}
+      {pageMode === 'edit' && <PostEdit post={post} />}
     </div>
   );
 };
