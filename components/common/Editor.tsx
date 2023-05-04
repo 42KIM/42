@@ -11,7 +11,7 @@ import { Editor as TuiEditor } from '@toast-ui/react-editor';
 import type { MutableRefObject } from 'react';
 
 interface Editor extends EditorProps {
-  editorRef: MutableRefObject<TuiEditor | null>;
+  editorRef: MutableRefObject<TuiEditor | null> | ((node: TuiEditor | null) => void);
 }
 
 const Editor = ({ editorRef, ...props }: Editor) => {
