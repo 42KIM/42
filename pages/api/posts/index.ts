@@ -21,8 +21,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(200).json(result);
   }
 
+  if (method === 'PUT') {
+    const { _id, ...rest } = req.body;
+    await Posts.updateOne({ _id: new ObjectId(_id) }, rest);
+
+    res.status(200).end();
+  }
+
   if (method === 'DELETE') {
-    const { deletedCount } = await Posts.deleteOne({ _id: new ObjectId(req.body._id) });
+    await Posts.deleteOne({ _id: new ObjectId(req.body._id) });
 
     // if (deletedCount === 1)
     res.status(200).end();

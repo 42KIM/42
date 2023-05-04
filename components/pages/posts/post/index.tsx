@@ -36,6 +36,7 @@ const PostPage = ({ post }: PostPageProps) => {
               }}>수정하기</button>
               : <button onClick={() => {
                 setPageMode('detail');
+                router.reload();
               }}>취소</button>
             }
             <button onClick={handleDelete}>삭제하기</button>
@@ -43,7 +44,9 @@ const PostPage = ({ post }: PostPageProps) => {
         )}
       </div>
       {pageMode === 'detail' && <PostDetail post={post} />}
-      {pageMode === 'edit' && <PostEdit post={post} />}
+      {pageMode === 'edit' && <PostEdit post={post} onSubmit={() => {
+        setPageMode('detail');
+      }} />}
     </div>
   );
 };

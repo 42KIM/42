@@ -23,6 +23,13 @@ export const APIService = {
       data: payload,
     });
   },
+  updatePosts: async (payload) => {
+    await _request({
+      method: 'PUT',
+      url: '/api/posts',
+      data: payload,
+    });
+  },
   createToken: async (payload) => {
     await _request({
       method: 'POST',

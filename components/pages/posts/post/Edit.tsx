@@ -1,10 +1,12 @@
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import type { Editor as TuiEditor } from '@toast-ui/react-editor';
 import type { Post } from '@/models/Posts';
+import { APIService } from '@/apis';
 
 type PostEditProps = {
   post: Post,
+  onSubmit: () => void,
 };
 
 const Editor = dynamic(
@@ -12,19 +14,36 @@ const Editor = dynamic(
   { ssr: false },
 );
 
-const PostEdit = ({ post }: PostEditProps) => {
+const PostEdit = ({ post, onSubmit }: PostEditProps) => {
   const [ title, setTitle ] = useState(post.title);
   const [ date, setDate ] = useState(post.date);
   const [ category, setCategory ] = useState(post.category);
   const [ tags, setTags ] = useState(post.tags.join(' '));
+  const editorRef = useRef<TuiEditor | null>(null);
 
-  const editorCallbackRef = (node: TuiEditor | null) => {
+  const editorRefCallback = (node: TuiEditor | null) => {
     if (node === null) return;
-    node.getInstance().setHTML(post.content);
+    node.getInstance().setMarkdown(post.content);
+    editorRef.current = node;
   };
 
-  const handleSubmit = () => {
-    // TODO - update api
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      await APIService.updatePosts({
+        _id: post._id,
+        title,
+        date,
+        category,
+        tags: tags.trim().split(' '),
+        content: editorRef.current?.getInstance().getMarkdown(),
+      });
+      alert('수정이 완료되었습니다.');
+      onSubmit();
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
@@ -38,7 +57,7 @@ const PostEdit = ({ post }: PostEditProps) => {
       <input className='h-10 text-md border-2 p-2' placeholder="카테고리" value={category} onChange={(e) => {
         setCategory(e.target.value);
       }} />
-      {<Editor editorRef={editorCallbackRef} />}
+      {<Editor editorRef={editorRefCallback} />}
       <input className='h-10 text-md border-2 p-2' placeholder="태그: 공백으로 구분" value={tags} onChange={(e) => {
         setTags(e.target.value);
       }} />
