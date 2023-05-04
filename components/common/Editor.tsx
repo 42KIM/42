@@ -6,20 +6,15 @@ import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin
 import Prism from 'prismjs';
 import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
+import type { EditorProps } from '@toast-ui/react-editor';
 import { Editor as TuiEditor } from '@toast-ui/react-editor';
 import type { MutableRefObject } from 'react';
-import { useEffect } from 'react';
 
-type EditorProps = {
-  editorRef: MutableRefObject<TuiEditor | null>,
-};
+interface Editor extends EditorProps {
+  editorRef: MutableRefObject<TuiEditor | null>;
+}
 
-const Editor = ({ editorRef }: EditorProps) => {
-  useEffect(() => {
-    if (!editorRef) return;
-    editorRef.current?.getInstance().setMarkdown('');
-  }, [ editorRef ]);
-
+const Editor = ({ editorRef, ...props }: Editor) => {
   return (
     <TuiEditor
       ref={editorRef}
@@ -28,6 +23,8 @@ const Editor = ({ editorRef }: EditorProps) => {
         colorSyntax,
         [ codeSyntaxHighlight, { highlighter: Prism } ],
       ]}
+
+      {...props}
     />
   );
 };
