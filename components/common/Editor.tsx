@@ -23,7 +23,6 @@ const Editor = ({ editorRef, ...props }: Editor) => {
         colorSyntax,
         [ codeSyntaxHighlight, { highlighter: Prism } ],
       ]}
-
       {...props}
     />
   );
