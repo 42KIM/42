@@ -23,7 +23,7 @@ const CreatePost = () => {
       date,
       category,
       content: editorRef.current?.getInstance().getMarkdown(),
-      tags: tags.trim().split(' '),
+      tags: tags.length > 0 ? tags.trim().split(' ') : [],
     });
   };
 
