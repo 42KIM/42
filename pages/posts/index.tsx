@@ -11,7 +11,7 @@ export const getServerSideProps = async () => {
 
   return {
     props: {
-      results: JSON.parse(JSON.stringify(results)),
+      posts: JSON.parse(JSON.stringify(results)),
     },
   };
 };
