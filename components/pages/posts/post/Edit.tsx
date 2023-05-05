@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import type { Editor as TuiEditor } from '@toast-ui/react-editor';
 import type { Post } from '@/models/Posts';
 import { APIService } from '@/apis';
@@ -21,11 +21,11 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
   const [ tags, setTags ] = useState(post.tags.join(' '));
   const editorRef = useRef<TuiEditor | null>(null);
 
-  const editorRefCallback = (node: TuiEditor | null) => {
+  const editorRefCallback = useCallback((node: TuiEditor | null) => {
     if (node === null) return;
     node.getInstance().setMarkdown(post.content);
     editorRef.current = node;
-  };
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -36,7 +36,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         title,
         date,
         category,
-        tags: tags.trim().split(' '),
+        tags: tags.length > 0 ? tags.trim().split(' ') : [],
         content: editorRef.current?.getInstance().getMarkdown(),
       });
       alert('수정이 완료되었습니다.');
@@ -57,7 +57,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
       <input className='h-10 text-md border-2 p-2' placeholder="카테고리" value={category} onChange={(e) => {
         setCategory(e.target.value);
       }} />
-      {<Editor editorRef={editorRefCallback} />}
+      <Editor editorRef={editorRefCallback} />
       <input className='h-10 text-md border-2 p-2' placeholder="태그: 공백으로 구분" value={tags} onChange={(e) => {
         setTags(e.target.value);
       }} />
