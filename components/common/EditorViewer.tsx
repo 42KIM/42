@@ -4,10 +4,9 @@ import 'prismjs/themes/prism.css';
 import Prism from 'prismjs';
 import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
 import { Viewer as TuiViewer } from '@toast-ui/react-editor';
-import type { Post } from '@/models/Posts';
 
 type EditorViewerProps = {
-  content: Post['content'],
+  content: string,
 };
 
 const EditorViewer = ({ content }: EditorViewerProps) => {
