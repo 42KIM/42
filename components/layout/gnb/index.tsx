@@ -13,7 +13,7 @@ type Menu = {
   adminOnly: boolean,
 };
 
-const githubLoginUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.GITHUB_CLIENT_ID}&redirect_url=http://localhost:3000/auth/callback`;
+const githubLoginUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.GITHUB_CLIENT_ID}&redirect_url=${process.env.BASE_URL}/auth/callback`;
 
 export const menus: Menu[] = [
   {
