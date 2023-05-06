@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
+  // reactStrictMode: true,
   env: {
     BASE_URL: process.env.NODE_ENV === 'development' && 'http://localhost:3000' ||
       process.env.NODE_ENV === 'production' && process.env.PRODUCTION_URL,
