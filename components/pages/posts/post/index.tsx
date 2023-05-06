@@ -22,6 +22,8 @@ const PostPage = ({ post }: PostPageProps) => {
     router.push('/posts');
   };
 
+  if (!post) return null;
+
   return (
     <div>
       <div className='flex justify-between text-sm text-blue-300'>
