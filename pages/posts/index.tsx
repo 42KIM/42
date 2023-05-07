@@ -3,7 +3,7 @@ import Posts from '@/models/Posts';
 
 export { default } from '@/components/pages/posts';
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   await dbConnect();
 
   const results = await Posts.find({})
