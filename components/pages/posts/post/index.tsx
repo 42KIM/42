@@ -22,6 +22,9 @@ const PostPage = ({ post }: PostPageProps) => {
     router.push('/posts');
   };
 
+  // TODO - loading spinner 추가
+  if (router.isFallback) return <div>Loading Page...</div>;
+
   if (!post) return null;
 
   return (
