@@ -39,6 +39,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         tags: tags.length > 0 ? tags.trim().split(' ') : [],
         content: editorRef.current?.getInstance().getMarkdown(),
       });
+      await APIService.revalidatePostsDetail({ id: post._id });
       alert('수정이 완료되었습니다.');
       onSubmit();
     } catch (error) {
