@@ -40,6 +40,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         content: editorRef.current?.getInstance().getMarkdown(),
       });
       await APIService.revalidatePostsDetail({ id: post._id });
+      await APIService.revalidatePosts();
       alert('수정이 완료되었습니다.');
       onSubmit();
     } catch (error) {
