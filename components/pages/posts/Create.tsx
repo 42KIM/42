@@ -25,6 +25,8 @@ const CreatePost = () => {
       content: editorRef.current?.getInstance().getMarkdown(),
       tags: tags.length > 0 ? tags.trim().split(' ') : [],
     });
+
+    await APIService.revalidatePosts();
   };
 
   return (

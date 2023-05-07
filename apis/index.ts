@@ -30,6 +30,12 @@ export const APIService = {
       data: payload,
     });
   },
+  revalidatePosts: async () => {
+    await _request({
+      method: 'GET',
+      url: '/api/revalidate/posts',
+    });
+  },
   createToken: async (payload) => {
     await _request({
       method: 'POST',
