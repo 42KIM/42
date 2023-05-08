@@ -15,6 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         },
       });
 
+      res.setHeader('Set-Cookie', `admin=${data.login === process.env.GITHUB_ADMIN_USER}; path=/;`);
       res.status(200).json(Object.assign(data, {
         isAdmin: data.login === process.env.GITHUB_ADMIN_USER,
       }));
