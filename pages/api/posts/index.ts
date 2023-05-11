@@ -8,13 +8,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   await dbConnect();
 
-  if (method === 'GET') {
-    const result = await Posts.find({})
-      .sort({ date: -1 });
-
-    res.status(200).json(result);
-  }
-
   if (method === 'POST') {
     const result = await Posts.create(req.body);
 
