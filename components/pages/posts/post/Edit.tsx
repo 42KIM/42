@@ -44,7 +44,8 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
       alert('수정이 완료되었습니다.');
       onSubmit();
     } catch (error) {
-      throw error;
+      alert(error.message.message);
+      // throw error;
     }
   };
 
