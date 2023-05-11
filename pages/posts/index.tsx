@@ -15,5 +15,3 @@ export const getStaticProps = async () => {
     },
   };
 };
-
-// TODO - 포스트 생성 후 on-demand ISR 하는 방식으로 변경하기

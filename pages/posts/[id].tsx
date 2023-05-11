@@ -27,5 +27,3 @@ export const getStaticProps = async (context) => {
     },
   };
 };
-
-// TODO - 포스팅 수정 기능을 추가하면 on-demand ISR을 추가한다.
