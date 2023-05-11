@@ -43,9 +43,8 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
       await APIService.revalidatePosts();
       alert('수정이 완료되었습니다.');
       onSubmit();
-    } catch (error: any) {
-      alert(error.message.message);
-      // throw error;
+    } catch (error) {
+      throw error;
     }
   };
 
