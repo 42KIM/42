@@ -9,10 +9,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   await dbConnect();
 
   if (method === 'GET') {
-    const result = await Posts.find({})
-      .sort({ date: -1 });
+    try {
+      const result = await Posts.find({})
+        .sort({ date: -1 });
 
-    res.status(200).json(result);
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: error });
+    }
   }
 
   if (method === 'POST') {
@@ -23,9 +27,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   if (method === 'PUT') {
     const { _id, ...rest } = req.body;
-    await Posts.updateOne({ _id: new ObjectId(_id) }, rest);
+    console.log(_id);
 
-    res.status(200).end();
+    try {
+      await Posts.updateOne({ _id: 'hello' }, rest);
+
+      res.status(200).end();
+    } catch (error) {
+      res.status(500).json({ message: error });
+    }
   }
 
   if (method === 'DELETE') {
