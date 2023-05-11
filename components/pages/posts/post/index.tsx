@@ -17,10 +17,14 @@ const PostPage = ({ post }: PostPageProps) => {
   const [ pageMode, setPageMode ] = useState<'detail' | 'edit'>('detail');
 
   const handleDelete = async () => {
-    await APIService.deletePosts({ _id: post._id });
-    await APIService.revalidatePosts();
-    alert('삭제되었습니다.');
-    router.push('/posts');
+    try {
+      await APIService.deletePosts({ _id: post._id });
+      await APIService.revalidatePosts();
+      alert('삭제되었습니다.');
+      router.push('/posts');
+    } catch (error) {
+      throw error;
+    }
   };
 
   // TODO - loading spinner 추가

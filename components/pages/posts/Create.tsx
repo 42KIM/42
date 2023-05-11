@@ -18,15 +18,19 @@ const CreatePost = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await APIService.createPosts({
-      title,
-      date,
-      category,
-      content: editorRef.current?.getInstance().getMarkdown(),
-      tags: tags.length > 0 ? tags.trim().split(' ') : [],
-    });
-
-    await APIService.revalidatePosts();
+    try {
+      await APIService.createPosts({
+        title,
+        date,
+        category,
+        content: editorRef.current?.getInstance().getMarkdown(),
+        tags: tags.length > 0 ? tags.trim().split(' ') : [],
+      });
+      await APIService.revalidatePosts();
+      alert('작성되었습니다.');
+    } catch (error) {
+      throw error;
+    }
   };
 
   return (
