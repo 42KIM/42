@@ -15,9 +15,12 @@ async function dbConnect() {
     throw new Error('undefined MongoDB URI');
   }
 
-  const db = await mongoose.connect(process.env.MONGODB_URI, { dbName: '42_blog' });
-
-  connection.isConnected = db.connections[0].readyState;
+  try {
+    const db = await mongoose.connect(process.env.MONGODB_URI, { dbName: '42_blog' });
+    connection.isConnected = db.connections[0].readyState;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export default dbConnect;
