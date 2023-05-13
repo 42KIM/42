@@ -12,7 +12,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths: results.map(({ _id }) => ({ params: { id: _id.toString() } })),
-    fallback: true,
+    fallback: 'blocking',
   };
 };
 
