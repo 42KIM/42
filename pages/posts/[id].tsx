@@ -20,7 +20,14 @@ export const getStaticProps = async (context) => {
   await dbConnect();
 
   const { id } = context.params;
+
   const result = await Posts.findOne<Post>({ _id: new ObjectId(id) });
+
+  if (!result) {
+    return {
+      notFound: true,
+    };
+  }
 
   return {
     props: {
