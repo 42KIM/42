@@ -21,6 +21,7 @@ export const getStaticProps = async (context) => {
 
   const { id } = context.params;
 
+  // TODO - error handle (유효하지 않은 id 일때 에러 발생 등)
   const result = await Posts.findOne<Post>({ _id: new ObjectId(id) });
 
   if (!result) {
