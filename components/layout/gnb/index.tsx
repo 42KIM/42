@@ -3,17 +3,15 @@ import { accessCookieAtom } from '@/lib/access-cookie';
 import { useIsSignedIn, useUser } from '@/lib/auth.service';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import githubLogo from '@/public/github-mark-white.svg';
+import GithubLoginButton from '@/components/common/GithubLoginButton';
 
 type Menu = {
   name: string,
   path: string,
   adminOnly: boolean,
 };
-
-const githubLoginUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.GITHUB_CLIENT_ID}&redirect_url=${process.env.BASE_URL}/auth/callback`;
 
 export const menus: Menu[] = [
   {
@@ -39,15 +37,9 @@ export const menus: Menu[] = [
 ];
 
 const Gnb = () => {
-  const router = useRouter();
   const user = useUser();
   const isSignedIn = useIsSignedIn();
   const setAccessCookie = useSetRecoilState(accessCookieAtom);
-
-  const handleSignIn = () => {
-    const redirectPath = router.asPath;
-    router.push(`${githubLoginUrl}&state=${redirectPath}`);
-  };
 
   const handleSignOut = async () => {
     await APIService.signOut();
@@ -70,11 +62,13 @@ const Gnb = () => {
         </div>
         <div className='flex items-center gap-2'>
           <Image src={githubLogo} alt='login' width={18} />
-          {user ?
-            <span className='text-sm text-white'>{user.login}</span> :
-            <button onClick={handleSignIn}>
-              <span className='text-sm text-white'>Login with Github</span>
-            </button>
+          {user
+            ? <span className='text-sm text-white'>{user.login}</span>
+            : (
+              <GithubLoginButton>
+                <span className='text-sm text-white'>Login with Github</span>
+              </GithubLoginButton>
+            )
           }
           {isSignedIn && <button className='text-sm text-white' onClick={handleSignOut}>로그아웃</button>}
         </div>
