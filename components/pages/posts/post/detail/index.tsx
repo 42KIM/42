@@ -1,6 +1,7 @@
 import type { Post } from '@/models/Posts';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import Comments from './Comments';
 
 type PostDetailProps = {
   post: Post,
@@ -31,6 +32,7 @@ const PostDetail = ({ post: { date, title, content, tags } }: PostDetailProps) =
           <EditorViewer content={content} />
         </div>
       </div>
+      <Comments />
     </>
   );
 };
