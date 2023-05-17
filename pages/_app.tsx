@@ -13,16 +13,24 @@ type PageComponentWithProps = NextPage & {
   },
 };
 
-export default function App({ Component, pageProps }: AppProps & { Component: PageComponentWithProps }) {
+export default function App({ Component, pageProps, router }: AppProps & { Component: PageComponentWithProps }) {
   const layoutProps = Component.getLayoutProps?.() || {};
 
   const { pageTitle, pageDescription } = Component.getPageProps?.() || {};
 
+  const title = pageTitle ? `${pageTitle} - 42's blog` : '42\'s blog';
+  const description = pageDescription || '프론트엔드 개발자 42KIM의 개인 기술 블로그';
+  const ogUrl = new URL(router.asPath, 'https://42blog.vercel.app');
+
   return (
     <>
       <Head>
-        <title>{pageTitle ? `${pageTitle} - 42's blog` : '42\'s blog'}</title>
-        <meta name="description" content={pageDescription || '프론트엔드 개발자 42KIM의 개인 기술 블로그'} />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta property='og:title' content={title} />
+        <meta property='og:description' content={description} />
+        <meta property='og:url' content={ogUrl.href} />
+        {/* TODO - add og:image */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
