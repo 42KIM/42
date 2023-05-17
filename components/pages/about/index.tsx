@@ -4,4 +4,10 @@ const About = () => {
   );
 };
 
+About.getPageProps = () => {
+  return {
+    pageTitle: 'About',
+  };
+};
+
 export default About;

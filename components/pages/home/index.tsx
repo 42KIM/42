@@ -15,4 +15,10 @@ Home.getLayoutProps = () => {
   };
 };
 
+Home.getPageProps = () => {
+  return {
+    pageTitle: 'Home',
+  };
+};
+
 export default Home;

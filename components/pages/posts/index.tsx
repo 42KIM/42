@@ -30,4 +30,10 @@ const Posts = ({ posts }: PostsProps) => {
   );
 };
 
+Posts.getPageProps = () => {
+  return {
+    pageTitle: 'Posts',
+  };
+};
+
 export default Posts;
