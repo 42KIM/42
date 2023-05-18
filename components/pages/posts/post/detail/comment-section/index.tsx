@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import GithubLoginButton from '@/components/common/GithubLoginButton';
 import { APIService } from '@/apis';
 import type { Comment } from '@/models/Comments';
-import CommentList from './CommentList';
+import CommentCard from './CommentCard';
 import CommentInput from './CommentInput';
 
 type CommentSectionProps = {
@@ -64,7 +64,11 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
             </GithubLoginButton>
           </div>
         )}
-      {commentList.length > 0 && <CommentList userId={user?.id} comments={commentList} />}
+      {commentList.length > 0 && (
+        <div className='flex flex-col gap-4 mt-14'>
+          {commentList.map((comment) => <CommentCard key={comment._id} userId={user?.id} comment={comment} />)}
+        </div>
+      )}
     </section>
   );
 };
