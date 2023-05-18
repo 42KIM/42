@@ -1,7 +1,7 @@
 import type { Post } from '@/models/Posts';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import Comments from './Comments';
+import CommentSection from './comment-section';
 
 type PostDetailProps = {
   post: Post,
@@ -32,7 +32,7 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
           <EditorViewer content={content} />
         </div>
       </div>
-      <Comments postId={_id} />
+      <CommentSection postId={_id} />
     </>
   );
 };

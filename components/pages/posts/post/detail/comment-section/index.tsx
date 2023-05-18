@@ -12,7 +12,7 @@ type CommentsProps = {
   postId: string,
 };
 
-const Comments = ({ postId }: CommentsProps) => {
+const CommentSection = ({ postId }: CommentsProps) => {
   const user = useUser();
 
   const [ comment, setComment ] = useState('');
@@ -109,4 +109,4 @@ const Comments = ({ postId }: CommentsProps) => {
   );
 };
 
-export default Comments;
+export default CommentSection;
