@@ -35,6 +35,27 @@ export const APIService = {
       data: payload,
     });
   },
+  createComments: async (payload) => {
+    await _request({
+      method: 'POST',
+      url: '/api/comments',
+      data: payload,
+    });
+  },
+  updateComments: async (payload) => {
+    await _request({
+      method: 'PUT',
+      url: '/api/comments',
+      data: payload,
+    });
+  },
+  deleteComments: async (payload) => {
+    await _request({
+      method: 'DELETE',
+      url: '/api/comments',
+      data: payload,
+    });
+  },
   createToken: async (payload) => {
     await _request({
       method: 'POST',
