@@ -32,7 +32,7 @@ export const getStaticProps = async (context) => {
 
   return {
     props: {
-      post: JSON.parse(JSON.stringify(result)),
+      post: JSON.parse(JSON.stringify(Object.assign(result, { _id: result._id.toString() }))),
     },
   };
 };
