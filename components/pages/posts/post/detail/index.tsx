@@ -12,7 +12,7 @@ const EditorViewer = dynamic(
   { ssr: false },
 );
 
-const PostDetail = ({ post: { date, title, content, tags } }: PostDetailProps) => {
+const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailProps) => {
   return (
     <>
       <Head>
@@ -32,7 +32,7 @@ const PostDetail = ({ post: { date, title, content, tags } }: PostDetailProps) =
           <EditorViewer content={content} />
         </div>
       </div>
-      <Comments />
+      <Comments postId={_id} />
     </>
   );
 };
