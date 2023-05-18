@@ -35,6 +35,17 @@ export const APIService = {
       data: payload,
     });
   },
+  getComments: async (payload) => {
+    const { data } = await _request({
+      method: 'GET',
+      url: '/api/comments',
+      params: {
+        postId: payload,
+      },
+    });
+
+    return data;
+  },
   createComments: async (payload) => {
     await _request({
       method: 'POST',

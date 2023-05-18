@@ -8,6 +8,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   await dbConnect();
 
+  if (method === 'GET') {
+    const { postId } = req.query;
+
+    const result = await Comments.find({ postId });
+
+    res.status(200).json(result);
+  }
+
   if (method === 'POST') {
     const result = await Comments.create(req.body);
 
