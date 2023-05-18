@@ -23,9 +23,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   if (method === 'PUT') {
-    const { _id, content } = req.body;
+    const { _id, content, isEdited } = req.body;
 
-    await Comments.updateOne({ _id: new ObjectId(_id) }, { content });
+    await Comments.updateOne({ _id: new ObjectId(_id) }, { content, isEdited });
 
     res.status(200).end();
   }

@@ -11,6 +11,7 @@ const CommentsSchema = new Schema({
   authorAvatar: { type: String, required: true },
   authorUrl: { type: String, required: true },
   isDeleted: { type: Boolean, required: false, default: false },
+  isEdited: { type: Boolean, required: false, default: false },
 }, {
   timestamps: true,
 });
