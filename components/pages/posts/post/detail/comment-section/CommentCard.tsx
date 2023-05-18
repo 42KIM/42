@@ -35,6 +35,7 @@ const CommentCard = ({
         isEdited: true,
       });
       alert('댓글이 수정되었습니다.');
+      setIsEditMode(false);
       onRefetch();
     } catch (error) {
       throw error;
