@@ -4,7 +4,10 @@ import { useEffect, useState } from 'react';
 import { APIService } from '@/apis';
 
 type User = {
+  id: number,
   login: string,
+  avatar_url: string,
+  html_url: string,
   isAdmin: boolean,
 };
 
