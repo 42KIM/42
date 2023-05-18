@@ -5,14 +5,13 @@ import { useEffect, useState } from 'react';
 import GithubLoginButton from '@/components/common/GithubLoginButton';
 import { APIService } from '@/apis';
 import type { Comment } from '@/models/Comments';
-import { formatDate } from '@/lib/format-date';
-import Avatar from '@/components/common/Avatart';
+import CommentList from './CommentList';
 
-type CommentsProps = {
+type CommentSectionProps = {
   postId: string,
 };
 
-const CommentSection = ({ postId }: CommentsProps) => {
+const CommentSection = ({ postId }: CommentSectionProps) => {
   const user = useUser();
 
   const [ comment, setComment ] = useState('');
@@ -84,27 +83,7 @@ const CommentSection = ({ postId }: CommentsProps) => {
           </GithubLoginButton>
         </div>
       )}
-      {commentList.length > 0 && (
-        <div className='flex flex-col gap-4 mt-14'>
-          {commentList.map((comment) => (
-            <div key={comment._id} className='flex flex-col gap-3 px-2 py-5'>
-              <div className='flex items-center gap-2'>
-                <Avatar
-                  src={comment.authorAvatar}
-                  width={50}
-                />
-                <div className='flex flex-col'>
-                  <a href={comment.authorUrl} target='_blank' rel="noreferrer">
-                    <span className='text-lg hover:opacity-50 hover:cursor-pointer'>{comment.author}</span>
-                  </a>
-                  <span className='text-sm text-gray-400'>{formatDate(comment.createdAt)}</span>
-                </div>
-              </div>
-              <span>{comment.content}</span>
-            </div>
-          ))}
-        </div>
-      )}
+      {commentList.length > 0 && <CommentList comments={commentList} />}
     </section>
   );
 };
