@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 type CommentCardProps = {
   userId?: number,
   comment: Comment,
+  onRefetch: () => void,
 };
 
 const CommentCard = ({
@@ -21,6 +22,7 @@ const CommentCard = ({
     createdAt,
     isEdited,
   },
+  onRefetch,
 }: CommentCardProps) => {
   const [ content, setContent ] = useState(initialContent);
   const [ isEditMode, setIsEditMode ] = useState(false);
@@ -33,6 +35,7 @@ const CommentCard = ({
         isEdited: true,
       });
       alert('댓글이 수정되었습니다.');
+      onRefetch();
     } catch (error) {
       throw error;
     }
@@ -42,6 +45,7 @@ const CommentCard = ({
     try {
       await APIService.deleteComments({ _id });
       alert('댓글이 삭제되었습니다.');
+      onRefetch();
     } catch (error) {
       throw error;
     }

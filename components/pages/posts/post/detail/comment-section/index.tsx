@@ -17,6 +17,15 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
 
   const [ commentList, setCommentList ] = useState<Comment[]>([]);
 
+  const refetchComment = async () => {
+    try {
+      const result = await APIService.getComments(postId);
+      setCommentList(result);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   const handleCommentSubmit = async (content: string) => {
     if (user === null) return;
 
@@ -30,8 +39,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         authorUrl: user.html_url,
       });
       alert('댓글이 등록되었습니다.');
-      const result = await APIService.getComments(postId);
-      setCommentList(result);
+      refetchComment();
     } catch (error) {
       throw error;
     }
@@ -52,7 +60,9 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
   return (
     <section className='my-5 py-10 border-t-2'>
       {user
-        ? <CommentInput userName={user.login} onSubmit={handleCommentSubmit} />
+        ? <CommentInput
+          userName={user.login}
+          onSubmit={handleCommentSubmit} />
         : (
           <div className='flex gap-2 justify-center items-center'>
             <span>댓글을 작성하려면 로그인이 필요합니다.</span>
@@ -66,7 +76,13 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         )}
       {commentList.length > 0 && (
         <div className='flex flex-col gap-4 mt-14'>
-          {commentList.map((comment) => <CommentCard key={comment._id} userId={user?.id} comment={comment} />)}
+          {commentList.map((comment) =>
+            <CommentCard
+              key={comment._id}
+              userId={user?.id}
+              comment={comment}
+              onRefetch={refetchComment}
+            />)}
         </div>
       )}
     </section>
