@@ -11,6 +11,6 @@ const PostsSchema = new Schema({
   timestamps: true,
 });
 
-export type Post = InferSchemaType<typeof PostsSchema> & { _id: Schema.Types.ObjectId | string };
+export type Post = InferSchemaType<typeof PostsSchema> & { _id: string };
 
 export default mongoose.models.Posts || mongoose.model('Posts', PostsSchema);

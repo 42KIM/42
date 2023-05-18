@@ -11,6 +11,6 @@ const CommentsSchema = new Schema({
   timestamps: true,
 });
 
-export type Comment = InferSchemaType<typeof CommentsSchema> & { _id: Schema.Types.ObjectId | string };
+export type Comment = InferSchemaType<typeof CommentsSchema> & { _id: string };
 
 export default mongoose.models.Comments || mongoose.model('Comments', CommentsSchema);
