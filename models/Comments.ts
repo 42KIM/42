@@ -2,11 +2,14 @@ import type { InferSchemaType } from 'mongoose';
 import mongoose, { Schema } from 'mongoose';
 
 const CommentsSchema = new Schema({
-  author: { type: String, required: true },
   postId: { type: String, required: true },
   content: { type: String, required: true },
   parentId: { type: String, required: false, default: null },
   children: { type: Array, required: false, default: [] },
+  author: { type: String, required: true },
+  authorId: { type: Number, required: true },
+  authorAvatar: { type: String, required: true },
+  authorUrl: { type: String, required: true },
 }, {
   timestamps: true,
 });
