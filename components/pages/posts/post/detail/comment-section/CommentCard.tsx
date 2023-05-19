@@ -2,7 +2,10 @@ import { APIService } from '@/apis';
 import Avatar from '@/components/common/Avatart';
 import { formatDate } from '@/lib/format-date';
 import type { Comment } from '@/models/Comments';
-import React, { useState } from 'react';
+import { useMemo, useState } from 'react';
+
+const unlikedStyle = 'w-fit py-1 px-2 text-xs border-2 border-neutral-300 rounded-2xl text-neutral-400 hover:cursor-pointer hover:border-rose-300 hover:text-rose-500';
+const likedStyled = 'w-fit py-1 px-2 text-xs border-2 border-rose-300 rounded-2xl text-rose-500 hover:cursor-pointer';
 
 type CommentCardProps = {
   userId?: number,
@@ -19,6 +22,7 @@ const CommentCard = ({
     authorId,
     authorAvatar,
     authorUrl,
+    likes,
     createdAt,
     isEdited,
   },
@@ -26,6 +30,13 @@ const CommentCard = ({
 }: CommentCardProps) => {
   const [ content, setContent ] = useState(initialContent);
   const [ isEditMode, setIsEditMode ] = useState(false);
+
+  const isMyComment = useMemo(() => userId === authorId, [ userId, authorId ]);
+  const isMyLike = useMemo(() => likes.some((like) => like.authorId === userId), [ likes, userId ]);
+  const likedUsers = useMemo(() => {
+    const joinedNames = likes.map((like) => like.author).join(', ');
+    return likes.length <= 5 ? joinedNames : `${joinedNames} 외 ${likes.length - 5}명이 좋아합니다.`;
+  }, [ likes ]);
 
   const handleEditComment = async ({ _id, content }: { _id: string, content: string }) => {
     if (!content.length) {
@@ -56,6 +67,27 @@ const CommentCard = ({
     }
   };
 
+  const handleLikeComment = async ({
+    _id,
+    author,
+    likes,
+  }: {
+    _id: string,
+    author: string,
+    likes: Array<{ authorId: number, author: string }>,
+  }) => {
+    const nextLikes = likes.some(({ authorId }) => authorId === userId)
+      ? likes.filter(({ authorId }) => authorId !== userId)
+      : [ ...likes, { author, authorId } ];
+
+    try {
+      await APIService.likeComments({ _id, likes: nextLikes });
+      onRefetch();
+    } catch (error) {
+      throw error;
+    }
+  };
+
   return (
     <div className='flex flex-col gap-3 px-2 py-5'>
       <div className='flex items-start gap-2'>
@@ -69,7 +101,7 @@ const CommentCard = ({
           </a>
           <span className='text-sm text-gray-400'>{formatDate(createdAt)}</span>
         </div>
-        {userId === authorId && (
+        {isMyComment && (
           <div className='flex gap-2 ml-auto'>
             <button
               className='text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer'
@@ -103,6 +135,13 @@ const CommentCard = ({
             {isEdited && <span className='ml-1 text-xs text-gray-400'>(수정됨)</span>}
           </p>
         )}
+      <div className='flex items-center mt-3'>
+        <button
+          className={isMyLike ? likedStyled : unlikedStyle}
+          onClick={() => handleLikeComment({ _id, author, likes })}
+        >좋아요 {likes?.length}</button>
+        {likes.length > 0 && <span className='ml-1 text-xs text-gray-400'>by {likedUsers}</span>}
+      </div>
     </div>
   );
 };
