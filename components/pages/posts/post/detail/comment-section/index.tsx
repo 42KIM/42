@@ -55,7 +55,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
       }
     };
     initComment();
-  }, []);
+  }, [ postId ]);
 
   return (
     <section className='my-5 py-10 border-t-2'>

@@ -25,7 +25,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
     if (node === null) return;
     node.getInstance().setMarkdown(post.content);
     editorRef.current = node;
-  }, []);
+  }, [ post.content ]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
