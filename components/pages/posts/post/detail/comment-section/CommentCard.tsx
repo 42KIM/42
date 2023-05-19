@@ -27,7 +27,7 @@ const CommentCard = ({
   const [ content, setContent ] = useState(initialContent);
   const [ isEditMode, setIsEditMode ] = useState(false);
 
-  const handleEditComment = async (_id: string, content: string) => {
+  const handleEditComment = async ({ _id, content }: { _id: string, content: string }) => {
     try {
       await APIService.updateComments({
         _id,
@@ -75,7 +75,7 @@ const CommentCard = ({
               }}>{isEditMode ? '취소' : '수정'}</button>
             {isEditMode && <button
               className='text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer'
-              onClick={() => handleEditComment(_id, content)}>완료</button>}
+              onClick={() => handleEditComment({ _id, content })}>완료</button>}
             <button
               className='text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer'
               onClick={() => handleDeleteComment(_id)}
