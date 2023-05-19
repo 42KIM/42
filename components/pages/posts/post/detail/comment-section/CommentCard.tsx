@@ -88,13 +88,15 @@ const CommentCard = ({
         )}
       </div>
       {isEditMode
-        ? <textarea
-          className='border-2 rounded-md p-2 resize-none'
-          value={content}
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
-        />
+        ? (
+          <textarea
+            className='border-2 rounded-md p-2 resize-none'
+            value={content}
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
+          />
+        )
         : (
           <p>
             <span>{initialContent}</span>
