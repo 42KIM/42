@@ -1,5 +1,5 @@
 import { APIService } from '@/apis';
-import Avatar from '@/components/common/Avatart';
+import Avatar from '@/components/common/Avatar';
 import { formatDate } from '@/lib/format-date';
 import type { Comment } from '@/models/Comments';
 import { useMemo, useState } from 'react';
