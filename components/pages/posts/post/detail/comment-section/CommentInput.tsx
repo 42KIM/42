@@ -1,19 +1,22 @@
-import Image from 'next/image';
-import githubLogo from '@/public/github-mark.svg';
 import { useState } from 'react';
+import Avatar from '@/components/common/Avatar';
 
 type CommentInputProps = {
   userName: string,
+  userAvatar: string,
   onSubmit: (content: string) => void,
 };
 
-const CommentInput = ({ userName, onSubmit }: CommentInputProps) => {
+const CommentInput = ({ userName, userAvatar, onSubmit }: CommentInputProps) => {
   const [ comment, setComment ] = useState('');
 
   return (
     <div className='flex flex-col gap-2'>
-      <div className='flex items-center gap-1'>
-        <Image src={githubLogo} alt='github_logo' width={20} />
+      <div className='flex items-center gap-2'>
+        <Avatar
+          src={userAvatar}
+          width={50}
+        />
         <span>{userName}</span>
       </div>
       <textarea

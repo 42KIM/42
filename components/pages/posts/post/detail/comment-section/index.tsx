@@ -62,6 +62,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
       {user
         ? <CommentInput
           userName={user.login}
+          userAvatar={user.avatar_url}
           onSubmit={handleCommentSubmit} />
         : (
           <div className='flex gap-2 justify-center items-center'>
