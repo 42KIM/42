@@ -67,6 +67,13 @@ export const APIService = {
       data: payload,
     });
   },
+  likeComments: async (payload) => {
+    await _request({
+      method: 'PUT',
+      url: '/api/comments/likes',
+      data: payload,
+    });
+  },
   createToken: async (payload) => {
     await _request({
       method: 'POST',

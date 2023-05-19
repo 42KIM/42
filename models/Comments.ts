@@ -10,6 +10,7 @@ const CommentsSchema = new Schema({
   authorId: { type: Number, required: true },
   authorAvatar: { type: String, required: true },
   authorUrl: { type: String, required: true },
+  likes: { type: Array, required: true, default: [] },
   isDeleted: { type: Boolean, required: false, default: false },
   isEdited: { type: Boolean, required: false, default: false },
 }, {
