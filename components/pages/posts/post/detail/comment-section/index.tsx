@@ -79,7 +79,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
           {commentList.map((comment) =>
             <CommentCard
               key={comment._id}
-              userId={user?.id}
+              user={user}
               comment={comment}
               onRefetch={refetchComment}
             />)}

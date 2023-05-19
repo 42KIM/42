@@ -3,7 +3,7 @@ import { accessCookieAtom, parseAccessCookie } from './access-cookie';
 import { useEffect, useState } from 'react';
 import { APIService } from '@/apis';
 
-type User = {
+export type User = {
   id: number,
   login: string,
   avatar_url: string,

@@ -1,5 +1,6 @@
 import { APIService } from '@/apis';
 import Avatar from '@/components/common/Avatar';
+import type { User } from '@/lib/auth.service';
 import { formatDate } from '@/lib/format-date';
 import type { Comment } from '@/models/Comments';
 import { useMemo, useState } from 'react';
@@ -8,13 +9,13 @@ const unlikedStyle = 'w-fit py-1 px-2 text-xs border-2 border-neutral-300 rounde
 const likedStyled = 'w-fit py-1 px-2 text-xs border-2 border-rose-300 rounded-2xl text-rose-500 hover:cursor-pointer';
 
 type CommentCardProps = {
-  userId?: number,
+  user: User | null,
   comment: Comment,
   onRefetch: () => void,
 };
 
 const CommentCard = ({
-  userId,
+  user,
   comment: {
     _id,
     content: initialContent,
@@ -31,8 +32,8 @@ const CommentCard = ({
   const [ content, setContent ] = useState(initialContent);
   const [ isEditMode, setIsEditMode ] = useState(false);
 
-  const isMyComment = useMemo(() => userId === authorId, [ userId, authorId ]);
-  const isMyLike = useMemo(() => likes.some((like) => like.authorId === userId), [ likes, userId ]);
+  const isMyComment = useMemo(() => user?.id === authorId, [ user, authorId ]);
+  const isMyLike = useMemo(() => likes.some((like) => like.authorId === user?.id), [ likes, user ]);
   const likedUsers = useMemo(() => {
     const joinedNames = likes.map((like) => like.author).join(', ');
     return likes.length <= 5 ? joinedNames : `${joinedNames} 외 ${likes.length - 5}명이 좋아합니다.`;
@@ -68,17 +69,15 @@ const CommentCard = ({
   };
 
   const handleLikeComment = async ({
-    _id,
-    author,
-    likes,
+    userId,
+    userName,
   }: {
-    _id: string,
-    author: string,
-    likes: Array<{ authorId: number, author: string }>,
+    userId: number,
+    userName: string,
   }) => {
     const nextLikes = likes.some(({ authorId }) => authorId === userId)
       ? likes.filter(({ authorId }) => authorId !== userId)
-      : [ ...likes, { author, authorId } ];
+      : [ ...likes, { author: userName, authorId: userId } ];
 
     try {
       await APIService.likeComments({ _id, likes: nextLikes });
@@ -138,7 +137,12 @@ const CommentCard = ({
       <div className='flex items-center mt-3'>
         <button
           className={isMyLike ? likedStyled : unlikedStyle}
-          onClick={() => handleLikeComment({ _id, author, likes })}
+          onClick={() => {
+            user ? handleLikeComment({
+              userId: user.id,
+              userName: user.login,
+            }) : alert('로그인이 필요합니다.');
+          }}
         >좋아요 {likes?.length}</button>
         {likes.length > 0 && <span className='ml-1 text-xs text-gray-400'>by {likedUsers}</span>}
       </div>
