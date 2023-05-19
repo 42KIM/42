@@ -28,6 +28,10 @@ const CommentCard = ({
   const [ isEditMode, setIsEditMode ] = useState(false);
 
   const handleEditComment = async ({ _id, content }: { _id: string, content: string }) => {
+    if (!content.length) {
+      alert('댓글 내용을 입력해주세요.');
+      return;
+    }
     try {
       await APIService.updateComments({
         _id,
