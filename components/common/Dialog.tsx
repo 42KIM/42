@@ -2,11 +2,11 @@ import { dialogAtom } from '@/lib/use-dialog';
 import type { PropsWithChildren, ReactNode } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 
-type ToastBackgroundProps = {
+type DialogBackgroundProps = {
   onBackgroundClick?: () => void,
 };
 
-type ToastProps = {
+type DialogProps = {
   title: string,
   content: ReactNode,
   onConfirm?: () => void,
@@ -14,17 +14,17 @@ type ToastProps = {
   onBackgroundClick?: () => void,
 };
 
-export const ToastBaseComponent = () => {
+export const DialogBaseComponent = () => {
   const dialogProps = useRecoilValue(dialogAtom);
 
   return (
-    <div id='toast-base-component'>
-      {dialogProps && <Toast {...dialogProps} />}
+    <div id='dialog-base-component'>
+      {dialogProps && <Dialog {...dialogProps} />}
     </div>
   );
 };
 
-const ToastBackground = ({ children, onBackgroundClick }: PropsWithChildren<ToastBackgroundProps>) => {
+const DialogBackground = ({ children, onBackgroundClick }: PropsWithChildren<DialogBackgroundProps>) => {
   return (
     <div
       id='bg'
@@ -34,13 +34,13 @@ const ToastBackground = ({ children, onBackgroundClick }: PropsWithChildren<Toas
   );
 };
 
-const Toast = ({
+const Dialog = ({
   title,
   content,
   onConfirm,
   onCancel,
   onBackgroundClick,
-}: ToastProps) => {
+}: DialogProps) => {
   const setDialog = useSetRecoilState(dialogAtom);
 
   const closeDialog = () => {
@@ -48,7 +48,7 @@ const Toast = ({
   };
 
   return (
-    <ToastBackground onBackgroundClick={onBackgroundClick} >
+    <DialogBackground onBackgroundClick={onBackgroundClick} >
       <div className='bg-sky-50 z-50 w-1/3 border-2 border-blue-100 flex flex-col gap-1'
         onClick={(e) => {
           e.stopPropagation();
@@ -79,8 +79,8 @@ const Toast = ({
             }}>CANCEL</button>}
         </div>
       </div>
-    </ToastBackground>
+    </DialogBackground>
   );
 };
 
-export default Toast;
+export default Dialog;
