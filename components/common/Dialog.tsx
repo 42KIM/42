@@ -1,12 +1,16 @@
-import { dialogAtom } from '@/lib/use-dialog';
 import type { PropsWithChildren, ReactNode } from 'react';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
+
+export const dialogAtom = atom<DialogProps | null>({
+  key: 'dialogAtom',
+  default: null,
+});
 
 type DialogBackgroundProps = {
   onBackgroundClick?: () => void,
 };
 
-type DialogProps = {
+export type DialogProps = {
   title: string,
   content: ReactNode,
   onConfirm?: () => void,
@@ -17,7 +21,6 @@ type DialogProps = {
 const DialogBackground = ({ children, onBackgroundClick }: PropsWithChildren<DialogBackgroundProps>) => {
   return (
     <div
-      id='bg'
       className='absolute z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-screen grid place-items-center'
       onClick={() => onBackgroundClick?.()}
     >{children}</div>

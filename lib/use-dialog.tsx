@@ -1,14 +1,6 @@
-import { atom, useSetRecoilState } from 'recoil';
-
-type DialogProps = {
-  title: string,
-  content: React.ReactNode,
-};
-
-export const dialogAtom = atom<DialogProps | null>({
-  key: 'dialogAtom',
-  default: null,
-});
+import type { DialogProps } from '@/components/common/Dialog';
+import { dialogAtom } from '@/components/common/Dialog';
+import { useSetRecoilState } from 'recoil';
 
 export const useDialog = () => {
   const setDialog = useSetRecoilState(dialogAtom);
