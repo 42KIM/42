@@ -1,14 +1,12 @@
-import type { Dispatch, PropsWithChildren, ReactNode, SetStateAction } from 'react';
-import { createPortal } from 'react-dom';
-
-const TOAST_BASE_ID = 'toast-base-component';
+import { dialogAtom } from '@/lib/use-dialog';
+import type { PropsWithChildren, ReactNode } from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 
 type ToastBackgroundProps = {
   onBackgroundClick?: () => void,
 };
 
 type ToastProps = {
-  showState: [ boolean, Dispatch<SetStateAction<boolean>> ],
   title: string,
   content: ReactNode,
   onConfirm?: () => void,
@@ -17,8 +15,12 @@ type ToastProps = {
 };
 
 export const ToastBaseComponent = () => {
+  const dialogProps = useRecoilValue(dialogAtom);
+
   return (
-    <div id={TOAST_BASE_ID} />
+    <div id='toast-base-component'>
+      {dialogProps && <Toast {...dialogProps} />}
+    </div>
   );
 };
 
@@ -33,21 +35,19 @@ const ToastBackground = ({ children, onBackgroundClick }: PropsWithChildren<Toas
 };
 
 const Toast = ({
-  showState,
   title,
   content,
   onConfirm,
   onCancel,
   onBackgroundClick,
 }: ToastProps) => {
-  const [ show, setShow ] = showState;
-  if (typeof window === 'undefined') return null;
+  const setDialog = useSetRecoilState(dialogAtom);
 
-  const baseComponent = document.getElementById(TOAST_BASE_ID);
+  const closeDialog = () => {
+    setDialog(null);
+  };
 
-  if (baseComponent === null) return null;
-
-  return show ? createPortal(
+  return (
     <ToastBackground onBackgroundClick={onBackgroundClick} >
       <div className='bg-sky-50 z-50 w-1/3 border-2 border-blue-100 flex flex-col gap-1'
         onClick={(e) => {
@@ -60,7 +60,7 @@ const Toast = ({
             className='text-neutral-500 opacity-50 hover:opacity-100'
             onClick={() => {
               onCancel ? onCancel() : onConfirm?.();
-              setShow(false);
+              closeDialog();
             }}>CLOSE</button>
         </div>
         <div className='px-1 my-4 text-md text-center'>{content}</div>
@@ -69,19 +69,18 @@ const Toast = ({
             className='text-xs font-medium text-sky-500 opacity-50 hover:opacity-100'
             onClick={() => {
               onConfirm?.();
-              setShow(false);
+              closeDialog();
             }}>OK</button>
           {onCancel && <button
             className='text-xs font-medium text-red-500 opacity-50 hover:opacity-100'
             onClick={() => {
               onCancel();
-              setShow(false);
+              closeDialog();
             }}>CANCEL</button>}
         </div>
       </div>
-    </ToastBackground>,
-    baseComponent
-  ) : null;
+    </ToastBackground>
+  );
 };
 
 export default Toast;
