@@ -14,16 +14,6 @@ type DialogProps = {
   onBackgroundClick?: () => void,
 };
 
-export const DialogBaseComponent = () => {
-  const dialogProps = useRecoilValue(dialogAtom);
-
-  return (
-    <div id='dialog-base-component'>
-      {dialogProps && <Dialog {...dialogProps} />}
-    </div>
-  );
-};
-
 const DialogBackground = ({ children, onBackgroundClick }: PropsWithChildren<DialogBackgroundProps>) => {
   return (
     <div
@@ -83,4 +73,14 @@ const Dialog = ({
   );
 };
 
-export default Dialog;
+const DialogBase = () => {
+  const dialogProps = useRecoilValue(dialogAtom);
+
+  return (
+    <div id='dialog-base-component'>
+      {dialogProps && <Dialog {...dialogProps} />}
+    </div>
+  );
+};
+
+export default DialogBase;
