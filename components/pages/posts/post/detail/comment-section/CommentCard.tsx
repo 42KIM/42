@@ -2,6 +2,7 @@ import { APIService } from '@/apis';
 import Avatar from '@/components/common/Avatar';
 import type { User } from '@/lib/auth.service';
 import { formatDate } from '@/lib/format-date';
+import { useDialog } from '@/lib/use-dialog';
 import type { Comment } from '@/models/Comments';
 import { useMemo, useState } from 'react';
 
@@ -31,6 +32,7 @@ const CommentCard = ({
 }: CommentCardProps) => {
   const [ content, setContent ] = useState(initialContent);
   const [ isEditMode, setIsEditMode ] = useState(false);
+  const { showDialog } = useDialog();
 
   const isMyComment = useMemo(() => user?.id === authorId, [ user, authorId ]);
   const isMyLike = useMemo(() => likes.some((like) => like.authorId === user?.id), [ likes, user ]);
@@ -41,7 +43,11 @@ const CommentCard = ({
 
   const handleEditComment = async ({ _id, content }: { _id: string, content: string }) => {
     if (!content.length) {
-      alert('댓글 내용을 입력해주세요.');
+      // TODO - dialog popup 시, background 크기 및 dialog 위치 수정
+      showDialog({
+        title: '주의',
+        content: '댓글 내용을 입력해주세요.',
+      });
       return;
     }
     try {
@@ -50,7 +56,10 @@ const CommentCard = ({
         content,
         isEdited: true,
       });
-      alert('댓글이 수정되었습니다.');
+      showDialog({
+        title: '완료',
+        content: '댓글이 수정되었습니다.',
+      });
       setIsEditMode(false);
       onRefetch();
     } catch (error) {
@@ -61,7 +70,10 @@ const CommentCard = ({
   const handleDeleteComment = async (_id: string) => {
     try {
       await APIService.deleteComments({ _id });
-      alert('댓글이 삭제되었습니다.');
+      showDialog({
+        title: '완료',
+        content: '댓글이 삭제되었습니다.',
+      });
       onRefetch();
     } catch (error) {
       throw error;
@@ -138,10 +150,15 @@ const CommentCard = ({
         <button
           className={isMyLike ? likedStyled : unlikedStyle}
           onClick={() => {
-            user ? handleLikeComment({
-              userId: user.id,
-              userName: user.login,
-            }) : alert('로그인이 필요합니다.');
+            user
+              ? handleLikeComment({
+                userId: user.id,
+                userName: user.login,
+              })
+              : showDialog({
+                title: '주의',
+                content: '로그인이 필요합니다.',
+              });
           }}
         >좋아요 {likes?.length}</button>
         {likes.length > 0 && <span className='ml-1 text-xs text-gray-400'>by {likedUsers}</span>}

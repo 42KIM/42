@@ -3,6 +3,7 @@ import { useCallback, useRef, useState } from 'react';
 import type { Editor as TuiEditor } from '@toast-ui/react-editor';
 import type { Post } from '@/models/Posts';
 import { APIService } from '@/apis';
+import { useDialog } from '@/lib/use-dialog';
 
 type PostEditProps = {
   post: Post,
@@ -20,6 +21,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
   const [ category, setCategory ] = useState(post.category);
   const [ tags, setTags ] = useState(post.tags.join(' '));
   const editorRef = useRef<TuiEditor | null>(null);
+  const { showDialog } = useDialog();
 
   const editorRefCallback = useCallback((node: TuiEditor | null) => {
     if (node === null) return;
@@ -41,7 +43,10 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
       });
       await APIService.revalidatePostsDetail({ id: post._id });
       await APIService.revalidatePosts();
-      alert('수정이 완료되었습니다.');
+      showDialog({
+        title: '완료',
+        content: '게시물이 수정되었습니다.',
+      });
       onSubmit();
     } catch (error) {
       throw error;

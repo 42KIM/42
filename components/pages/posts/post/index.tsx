@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import PostEdit from './Edit';
 import PostDetail from './detail';
+import { useDialog } from '@/lib/use-dialog';
 
 type PostPageProps = {
   post: Post,
@@ -15,12 +16,16 @@ const PostPage = ({ post }: PostPageProps) => {
   const router = useRouter();
   const user = useUser();
   const [ pageMode, setPageMode ] = useState<'detail' | 'edit'>('detail');
+  const { showDialog } = useDialog();
 
   const handleDelete = async () => {
     try {
       await APIService.deletePosts({ _id: post._id });
       await APIService.revalidatePosts();
-      alert('삭제되었습니다.');
+      showDialog({
+        title: '완료',
+        content: '게시물이 삭제되었습니다.',
+      });
       router.push('/posts');
     } catch (error) {
       throw error;

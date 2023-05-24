@@ -7,6 +7,7 @@ import { APIService } from '@/apis';
 import type { Comment } from '@/models/Comments';
 import CommentCard from './CommentCard';
 import CommentInput from './CommentInput';
+import { useDialog } from '@/lib/use-dialog';
 
 type CommentSectionProps = {
   postId: string,
@@ -14,6 +15,7 @@ type CommentSectionProps = {
 
 const CommentSection = ({ postId }: CommentSectionProps) => {
   const user = useUser();
+  const { showDialog } = useDialog();
 
   const [ commentList, setCommentList ] = useState<Comment[]>([]);
 
@@ -38,7 +40,10 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         authorAvatar: user.avatar_url,
         authorUrl: user.html_url,
       });
-      alert('댓글이 등록되었습니다.');
+      showDialog({
+        title: '완료',
+        content: '댓글이 등록되었습니다.',
+      });
       refetchComment();
     } catch (error) {
       throw error;

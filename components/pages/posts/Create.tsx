@@ -2,6 +2,7 @@ import { APIService } from '@/apis';
 import dynamic from 'next/dynamic';
 import { useRef, useState } from 'react';
 import type { Editor as TuiEditor } from '@toast-ui/react-editor';
+import { useDialog } from '@/lib/use-dialog';
 
 const Editor = dynamic(
   () => import('@/components/common/Editor'),
@@ -14,6 +15,7 @@ const CreatePost = () => {
   const [ category, setCategory ] = useState('');
   const [ tags, setTags ] = useState('');
   const editorRef = useRef<TuiEditor>(null);
+  const { showDialog } = useDialog();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -27,7 +29,10 @@ const CreatePost = () => {
         tags: tags.length > 0 ? tags.trim().split(' ') : [],
       });
       await APIService.revalidatePosts();
-      alert('작성되었습니다.');
+      showDialog({
+        title: '완료',
+        content: '게시물이 작성되었습니다.',
+      });
     } catch (error) {
       throw error;
     }
