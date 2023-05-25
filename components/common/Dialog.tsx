@@ -21,7 +21,7 @@ export type DialogProps = {
 const DialogBackground = ({ children, onBackgroundClick }: PropsWithChildren<DialogBackgroundProps>) => {
   return (
     <div
-      className='absolute z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-screen h-screen grid place-items-center'
+      className='fixed w-screen h-screen z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid place-items-center'
       onClick={() => onBackgroundClick?.()}
     >{children}</div>
   );
