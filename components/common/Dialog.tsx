@@ -51,7 +51,7 @@ const Dialog = ({
 
   return (
     <DialogBackground onBackgroundClick={onBackgroundClick} >
-      <div className='bg-sky-50 z-50 w-1/3 border-2 border-blue-100 flex flex-col gap-1'
+      <div className='bg-sky-50 z-50 w-80 border-2 border-blue-100 flex flex-col gap-1 shadow-lg'
         onClick={(e) => {
           e.stopPropagation();
         }}
