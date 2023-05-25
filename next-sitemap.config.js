@@ -1,13 +1,16 @@
 const exclude = [
-  '/posts/create',
-  '/posts/edit',
+  '/dynamic-sitemap.xml',
+  '/posts/*',
 ];
+
+const siteUrl = process.env.PRODUCTION_URL || 'https://42blog.vercel.app';
 
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.PRODUCTION_URL || 'https://42blog.vercel.app',
+  siteUrl,
   changefreq: false,
   generateIndexSitemap: false,
+  exclude,
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
@@ -15,7 +18,7 @@ module.exports = {
         userAgent: '*',
         disallow: exclude,
       }
-    ]
+    ],
+    additionalSitemaps: [ `${siteUrl}/dynamic-sitemap.xml` ]
   },
-  exclude,
 };
