@@ -47,7 +47,7 @@ const Gnb = () => {
   };
 
   return (
-    <header className="sticky z-30 top-0 w-screen flex h-20 justify-center bg-blue-200">
+    <header className="sticky z-30 top-0 flex h-20 justify-center bg-blue-200">
       <div className="flex w-full max-w-2xl justify-between p-5">
         <div className="flex items-center gap-10">
           {menus.map(({ name, path, adminOnly }) => {
