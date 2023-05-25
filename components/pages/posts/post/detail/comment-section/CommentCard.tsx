@@ -43,7 +43,6 @@ const CommentCard = ({
 
   const handleEditComment = async ({ _id, content }: { _id: string, content: string }) => {
     if (!content.length) {
-      // TODO - dialog popup 시, background 크기 및 dialog 위치 수정
       showDialog({
         title: '주의',
         content: '댓글 내용을 입력해주세요.',
@@ -59,9 +58,11 @@ const CommentCard = ({
       showDialog({
         title: '완료',
         content: '댓글이 수정되었습니다.',
+        onConfirm: () => {
+          setIsEditMode(false);
+          onRefetch();
+        },
       });
-      setIsEditMode(false);
-      onRefetch();
     } catch (error) {
       throw error;
     }
@@ -73,8 +74,8 @@ const CommentCard = ({
       showDialog({
         title: '완료',
         content: '댓글이 삭제되었습니다.',
+        onConfirm: onRefetch,
       });
-      onRefetch();
     } catch (error) {
       throw error;
     }

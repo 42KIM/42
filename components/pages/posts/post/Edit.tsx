@@ -46,8 +46,8 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
       showDialog({
         title: '완료',
         content: '게시물이 수정되었습니다.',
+        onConfirm: onSubmit,
       });
-      onSubmit();
     } catch (error) {
       throw error;
     }

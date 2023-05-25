@@ -25,8 +25,8 @@ const PostPage = ({ post }: PostPageProps) => {
       showDialog({
         title: '완료',
         content: '게시물이 삭제되었습니다.',
+        onConfirm: () => router.push('/posts'),
       });
-      router.push('/posts');
     } catch (error) {
       throw error;
     }

@@ -43,8 +43,8 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
       showDialog({
         title: '완료',
         content: '댓글이 등록되었습니다.',
+        onConfirm: refetchComment,
       });
-      refetchComment();
     } catch (error) {
       throw error;
     }
