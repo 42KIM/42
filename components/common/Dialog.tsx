@@ -1,4 +1,5 @@
 import type { PropsWithChildren, ReactNode } from 'react';
+import { useEffect } from 'react';
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 
 export const dialogAtom = atom<DialogProps | null>({
@@ -19,6 +20,14 @@ export type DialogProps = {
 };
 
 const DialogBackground = ({ children, onBackgroundClick }: PropsWithChildren<DialogBackgroundProps>) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
     <div
       className='fixed w-screen h-screen z-40 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 grid place-items-center'
