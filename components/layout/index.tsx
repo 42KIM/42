@@ -13,7 +13,7 @@ const Layout = ({ children, showGnb = true }: PropsWithChildren<LayoutProps>) =>
   return (
     <>
       {showGnb && <Gnb />}
-      <main className="max-w-2xl min-h-[calc(100%-80px)] m-auto px-5 py-4">
+      <main className="max-w-2xl min-h-[calc(100vh-80px)] mx-auto px-5 py-4">
         {children}
       </main>
       <DialogBaseComponent />
