@@ -1,4 +1,4 @@
-const exclude = [
+const dynamicGeneration = [
   '/dynamic-sitemap.xml',
   '/posts/*',
 ];
@@ -10,13 +10,16 @@ module.exports = {
   siteUrl,
   changefreq: false,
   generateIndexSitemap: false,
-  exclude,
+  exclude: dynamicGeneration,
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [
       {
         userAgent: '*',
-        disallow: exclude,
+        disallow: [
+          '/posts/create',
+          '/posts/edit',
+        ],
       }
     ],
     additionalSitemaps: [ `${siteUrl}/dynamic-sitemap.xml` ]
