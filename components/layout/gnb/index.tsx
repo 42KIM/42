@@ -54,7 +54,7 @@ const Gnb = () => {
             if (!adminOnly || (adminOnly && user?.isAdmin)) {
               return (
                 <Link key={name} href={path}>
-                  <span>{name}</span>
+                  <span className='text-white hover:text-blue-500'>{name}</span>
                 </Link>
               );
             }
