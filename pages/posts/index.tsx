@@ -8,6 +8,7 @@ export const getStaticProps = async () => {
   await dbConnect();
 
   const results = await Posts.find<Post>({})
+    .sort({ date: 'descending' })
     .limit(10);
 
   return {
