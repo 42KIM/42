@@ -16,7 +16,7 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
   return (
     <>
       <Head>
-        <title>{`${title} - 42's blog2222`}</title>
+        <title>{`${title} - 42's blog`}</title>
         <meta property='og:title' content={title} />
         {/* TODO - post description meta tag */}
       </Head>
