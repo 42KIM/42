@@ -66,4 +66,10 @@ const PostPage = ({ post }: PostPageProps) => {
   );
 };
 
+PostPage.getPageProps = () => {
+  return {
+    hasOgTag: true,
+  };
+};
+
 export default PostPage;
