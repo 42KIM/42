@@ -33,6 +33,20 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
         <div>
           <EditorViewer content={content} />
         </div>
+        <div className='flex flex-col items-center mt-10'>
+          <div className='w-1/3 h-0 border-t-2 border-dotted pt-6' />
+          <p className='text-xs text-neutral-400 text-center italic '>
+            피드백은 언제나 감사합니다.<br />
+            오류 정정, 질문, 토론거리를 자유롭게 댓글로 남겨주세요.<br />
+            블로그 소스코드에 대한 리뷰, PR도 적극 환영합니다!<br />
+            <a
+              className='text-blue-300 hover:text-blue-500'
+              href='https://github.com/42KIM/blog'
+              target='_blank'
+              rel="noreferrer"
+            >► Github Repository 바로가기</a>
+          </p>
+        </div>
       </div>
       <CommentSection postId={_id} />
     </>
