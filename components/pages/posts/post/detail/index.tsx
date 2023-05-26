@@ -12,7 +12,11 @@ const EditorViewer = dynamic(
   { ssr: false },
 );
 
+let pageTitle;
+
 const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailProps) => {
+  pageTitle = title;
+
   return (
     <>
       <Head>
@@ -35,6 +39,12 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
       <CommentSection postId={_id} />
     </>
   );
+};
+
+PostDetail.getPageProps = () => {
+  return {
+    pageTitle,
+  };
 };
 
 export default PostDetail;
