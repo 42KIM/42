@@ -12,15 +12,13 @@ const EditorViewer = dynamic(
   { ssr: false },
 );
 
-let pageTitle;
-
 const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailProps) => {
-  pageTitle = title;
-
   return (
     <>
       <Head>
-        <title>{`${title} - 42's blog`}</title>
+        <title>{`${title} - 42's blog2222`}</title>
+        <meta property='og:title' content={title} />
+        {/* TODO - post description meta tag */}
       </Head>
       <div className='py-4'>
         <div className='flex flex-col items-center border-dashed border-2 border-x-0 mb-16 py-6'>
@@ -39,12 +37,6 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
       <CommentSection postId={_id} />
     </>
   );
-};
-
-PostDetail.getPageProps = () => {
-  return {
-    pageTitle,
-  };
 };
 
 export default PostDetail;
