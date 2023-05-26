@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 
-const githubLoginUrl = `https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.GITHUB_CLIENT_ID}&redirect_url=${process.env.BASE_URL}/auth/callback`;
+const githubLoginUrl = `https://github.com/login/oauth/authorize?client_id=${process.env.GITHUB_CLIENT_ID}&redirect_url=${process.env.BASE_URL}/auth/callback`;
 
 const GithubLoginButton = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
