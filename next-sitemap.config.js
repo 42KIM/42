@@ -3,6 +3,11 @@ const dynamicGeneration = [
   '/posts/*',
 ];
 
+const privateRoutes = [
+  '/posts/create',
+  '/posts/edit',
+];
+
 const siteUrl = process.env.PRODUCTION_URL || 'https://42blog.vercel.app';
 
 /** @type {import('next-sitemap').IConfig} */
@@ -16,10 +21,7 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
-        disallow: [
-          '/posts/create',
-          '/posts/edit',
-        ],
+        disallow: privateRoutes,
       }
     ],
     additionalSitemaps: [ `${siteUrl}/dynamic-sitemap.xml` ]
