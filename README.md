@@ -3,7 +3,7 @@
 
 ## 실행 방법
 
-- Development (단! `getStaticProps`가 매 요청마다 호출)
+- Development (단! 개발 환경에서는 `getStaticProps`가 매 요청마다 호출됩니다)
 ```bash
 yarn dev
 ```
@@ -28,5 +28,5 @@ yarn start
 `MongoDB`
 `Mongoose`
 
-## DEPLOYMENT
+### DEPLOYMENT
 `Vercel`
