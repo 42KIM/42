@@ -14,6 +14,7 @@ const siteUrl = process.env.PRODUCTION_URL || 'https://42blog.vercel.app';
 module.exports = {
   siteUrl,
   changefreq: false,
+  autoLastmod: false,
   generateIndexSitemap: false,
   exclude: dynamicGeneration,
   generateRobotsTxt: true,

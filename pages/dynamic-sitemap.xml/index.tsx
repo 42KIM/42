@@ -13,7 +13,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 
   const fields = results.map(({ _id }) => ({
     loc: `${siteUrl}/posts/${_id.toString()}`,
-    lastmod: new Date().toISOString(),
     priority: 0.7,
   }));
 

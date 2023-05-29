@@ -54,7 +54,7 @@ const Gnb = () => {
             if (!adminOnly || (adminOnly && user?.isAdmin)) {
               return (
                 <Link key={name} href={path}>
-                  <span>{name}</span>
+                  <span className='text-white hover:text-blue-500'>{name}</span>
                 </Link>
               );
             }
@@ -66,11 +66,13 @@ const Gnb = () => {
             ? <span className='text-sm text-white'>{user.login}</span>
             : (
               <GithubLoginButton>
-                <span className='text-sm text-white'>Login with Github</span>
+                <span className='text-sm text-white hover:text-blue-500'>Login with Github</span>
               </GithubLoginButton>
             )
           }
-          {isSignedIn && <button className='text-sm text-white' onClick={handleSignOut}>로그아웃</button>}
+          {isSignedIn && <button
+            className='text-sm text-white hover:text-blue-500'
+            onClick={handleSignOut}>로그아웃</button>}
         </div>
       </div>
     </header>
