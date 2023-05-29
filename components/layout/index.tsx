@@ -9,7 +9,7 @@ type LayoutProps = {
 
 const Layout = ({ children, showGnb = true }: PropsWithChildren<LayoutProps>) => {
   useAuthentication();
-  console.log('layout!');
+
   return (
     <>
       {showGnb && <Gnb />}
