@@ -41,6 +41,7 @@ export default function App({ Component, pageProps, router }: AppProps & { Compo
         <meta property='og:url' content={ogUrl.href} />
         {/* TODO - add og:image */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="google-site-verification" content="dBgFFdRczNH_XqiqGXYjwDQIugMFrpfgrC1gm4R6WH8" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <RecoilRoot>
