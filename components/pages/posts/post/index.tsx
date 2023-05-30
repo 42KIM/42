@@ -3,9 +3,7 @@ import { useUser } from '@/lib/auth.service';
 import type { Post } from '@/models/Posts';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
-import PostEdit from './Edit';
-import PostDetail from './detail';
+import PostContent from './Content';
 import { useDialog } from '@/lib/use-dialog';
 
 type PostPageProps = {
@@ -15,7 +13,6 @@ type PostPageProps = {
 const PostPage = ({ post }: PostPageProps) => {
   const router = useRouter();
   const user = useUser();
-  const [ pageMode, setPageMode ] = useState<'detail' | 'edit'>('detail');
   const { showDialog } = useDialog();
 
   const handleDelete = async () => {
@@ -44,24 +41,14 @@ const PostPage = ({ post }: PostPageProps) => {
           <button>◀️ 목록</button>
         </Link>
         {user?.isAdmin && (
-          <div className='flex gap-4'>
-            {pageMode === 'detail'
-              ? <button onClick={() => {
-                setPageMode('edit');
-              }}>수정하기</button>
-              : <button onClick={() => {
-                setPageMode('detail');
-                router.reload();
-              }}>취소</button>
-            }
-            <button onClick={handleDelete}>삭제하기</button>
+          <div className='flex gap-4'><button onClick={() => {
+            router.push(`/posts/${post._id}/edit`);
+          }}>수정하기</button>
+          <button onClick={handleDelete}>삭제하기</button>
           </div>
         )}
       </div>
-      {pageMode === 'detail' && <PostDetail post={post} />}
-      {pageMode === 'edit' && <PostEdit post={post} onSubmit={() => {
-        setPageMode('detail');
-      }} />}
+      <PostContent post={post} />
     </div>
   );
 };
