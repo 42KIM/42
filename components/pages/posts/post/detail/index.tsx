@@ -1,16 +1,11 @@
 import type { Post } from '@/models/Posts';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import CommentSection from './comment-section';
+import Viewer from '@/components/common/Viewer';
 
 type PostDetailProps = {
   post: Post,
 };
-
-const EditorViewer = dynamic(
-  () => import('@/components/common/EditorViewer'),
-  { ssr: false },
-);
 
 const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailProps) => {
   return (
@@ -30,9 +25,7 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
           <span className='text-4xl font-bold mt-1'>{title}</span>
           <span className='text-xs'>{date}</span>
         </div>
-        <div>
-          <EditorViewer content={content} />
-        </div>
+        <Viewer html={content} />
         <div className='flex flex-col items-center mt-10'>
           <div className='w-1/3 h-0 border-t-2 border-dotted pt-6' />
           <p className='text-xs text-neutral-400 text-center italic '>

@@ -1,4 +1,5 @@
 import dbConnect from '@/lib/mongoose';
+import { parseMarkdown } from '@/lib/parse-markdown';
 import type { Post } from '@/models/Posts';
 import Posts from '@/models/Posts';
 import { ObjectId } from 'mongodb';
@@ -30,9 +31,15 @@ export const getStaticProps = async (context) => {
     };
   }
 
+  const parsedContent = parseMarkdown(result.content);
+  const parsedResult = Object.assign(result, {
+    _id: result._id.toString(),
+    content: parsedContent,
+  });
+
   return {
     props: {
-      post: JSON.parse(JSON.stringify(Object.assign(result, { _id: result._id.toString() }))),
+      post: JSON.parse(JSON.stringify(parsedResult)),
     },
   };
 };
