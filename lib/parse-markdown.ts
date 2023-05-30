@@ -31,6 +31,6 @@ marked.use(markedHighlight({
   },
 }));
 
-export const parseMarkdown = (markdown: string) => {
+export const parseMarkdownToHTML = (markdown: string) => {
   return marked.parse(markdown);
 };
