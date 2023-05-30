@@ -1,4 +1,15 @@
 import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
+import hljs from 'highlight.js/lib/core';
+import javascript from 'highlight.js/lib/languages/javascript';
+import typescript from 'highlight.js/lib/languages/typescript';
+import css from 'highlight.js/lib/languages/css';
+import json from 'highlight.js/lib/languages/json';
+
+hljs.registerLanguage('javascript', javascript);
+hljs.registerLanguage('typescript', typescript);
+hljs.registerLanguage('css', css);
+hljs.registerLanguage('json', json);
 
 const renderer = {
   link(href: string, title: string, text: string) {
@@ -6,8 +17,20 @@ const renderer = {
   },
 };
 
-marked.use({ renderer });
+marked.use({
+  mangle: false,
+  headerIds: false,
+  renderer,
+});
+
+marked.use(markedHighlight({
+  langPrefix: 'hljs language-',
+  highlight(code, lang) {
+    const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+    return hljs.highlight(code, { language }).value;
+  },
+}));
 
 export const parseMarkdown = (markdown: string) => {
-  return marked(markdown);
+  return marked.parse(markdown);
 };
