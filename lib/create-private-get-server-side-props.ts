@@ -1,7 +1,7 @@
 import type { GetServerSideProps, GetServerSidePropsResult } from 'next';
 
 type Context = Parameters<GetServerSideProps>[0];
-type PrivateGetServerSidePropsCallback = (context: Context) => GetServerSidePropsResult<{}>;
+type PrivateGetServerSidePropsCallback = (context: Context) => GetServerSidePropsResult<{}> | Promise<GetServerSidePropsResult<{}>>;
 
 export const createPrivateGetServerSideProps = (callback: PrivateGetServerSidePropsCallback) => async (context: Context) => {
   const { req } = context;

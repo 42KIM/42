@@ -1,8 +1,9 @@
 import { APIService } from '@/apis';
 import dynamic from 'next/dynamic';
+import type { FormEvent } from 'react';
 import { useRef, useState } from 'react';
-import type { Editor as TuiEditor } from '@toast-ui/react-editor';
 import { useDialog } from '@/lib/use-dialog';
+import type EasyMDE from 'easymde';
 
 const Editor = dynamic(
   () => import('@/components/common/Editor'),
@@ -14,10 +15,10 @@ const CreatePost = () => {
   const [ date, setDate ] = useState('');
   const [ category, setCategory ] = useState('');
   const [ tags, setTags ] = useState('');
-  const editorRef = useRef<TuiEditor>(null);
+  const editorRef = useRef<EasyMDE>(null);
   const { showDialog } = useDialog();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
     try {
@@ -25,7 +26,7 @@ const CreatePost = () => {
         title,
         date,
         category,
-        content: editorRef.current?.getInstance().getMarkdown(),
+        content: editorRef.current?.value(),
         tags: tags.length > 0 ? tags.trim().split(' ') : [],
       });
       await APIService.revalidatePosts();
