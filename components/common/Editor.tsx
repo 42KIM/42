@@ -1,31 +1,37 @@
-import '@toast-ui/editor/dist/toastui-editor.css';
-import 'tui-color-picker/dist/tui-color-picker.css';
-import 'prismjs/themes/prism.css';
-import '@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css';
-import '@toast-ui/editor-plugin-code-syntax-highlight/dist/toastui-editor-plugin-code-syntax-highlight.css';
-import Prism from 'prismjs';
-import colorSyntax from '@toast-ui/editor-plugin-color-syntax';
-import codeSyntaxHighlight from '@toast-ui/editor-plugin-code-syntax-highlight';
-import type { EditorProps } from '@toast-ui/react-editor';
-import { Editor as TuiEditor } from '@toast-ui/react-editor';
+import { memo } from 'react';
 import type { MutableRefObject } from 'react';
+import EasyMDE from 'easymde';
+import { parseMarkdownToHTML } from '@/lib/parse-markdown';
+import 'easymde/dist/easymde.min.css';
 
-interface Editor extends EditorProps {
-  editorRef: MutableRefObject<TuiEditor | null> | ((node: TuiEditor | null) => void);
-}
+type EditorProps = {
+  editorRef: MutableRefObject<EasyMDE | null>,
+  initialValue?: string,
+};
 
-const Editor = ({ editorRef, ...props }: Editor) => {
+const Editor = ({ editorRef, initialValue = '' }: EditorProps) => {
+  const callbackRef = (node: HTMLTextAreaElement) => {
+    if (node === null) return;
+
+    const easyMde = new EasyMDE({
+      element: node,
+      initialValue,
+      autofocus: true,
+      spellChecker: false,
+      maxHeight: '800px',
+      sideBySideFullscreen: false,
+      previewClass: '',
+      previewRender: (plainText: string) => parseMarkdownToHTML(plainText),
+    });
+
+    editorRef.current = easyMde;
+  };
+
   return (
-    <TuiEditor
-      ref={editorRef}
-      height='600px'
-      plugins={[
-        colorSyntax,
-        [ codeSyntaxHighlight, { highlighter: Prism } ],
-      ]}
-      {...props}
-    />
+    <div className='prose prose-sm max-w-none max-h-fit prose-p:my-1 prose-hr:my-5 prose-ul:my-1 prose-code:text-xs'>
+      <textarea ref={callbackRef} />
+    </div>
   );
 };
 
-export default Editor;
+export default memo(Editor);
