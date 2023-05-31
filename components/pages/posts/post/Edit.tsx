@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic';
-import { useCallback, useRef, useState } from 'react';
-import type { Editor as TuiEditor } from '@toast-ui/react-editor';
+import { useRef, useState } from 'react';
 import type { Post } from '@/models/Posts';
 import { APIService } from '@/apis';
 import { useDialog } from '@/lib/use-dialog';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useUser } from '@/lib/auth.service';
+import type EasyMDE from 'easymde';
 
 type PostEditProps = {
   post: Post,
@@ -24,16 +24,9 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
   const [ date, setDate ] = useState(post.date);
   const [ category, setCategory ] = useState(post.category);
   const [ tags, setTags ] = useState(post.tags.join(' '));
-  const editorRef = useRef<TuiEditor | null>(null);
+  const editorRef = useRef<EasyMDE | null>(null);
   const { showDialog } = useDialog();
   const user = useUser();
-
-  const editorRefCallback = useCallback((node: TuiEditor | null) => {
-    if (node === null) return;
-    console.log('client: ', post.content);
-    node.getInstance().setMarkdown(post.content);
-    editorRef.current = node;
-  }, [ post.content ]);
 
   const handleDelete = async () => {
     try {
@@ -59,7 +52,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         date,
         category,
         tags: tags.length > 0 ? tags.trim().split(' ') : [],
-        content: editorRef.current?.getInstance().getMarkdown(),
+        content: editorRef.current?.value(),
       });
       await APIService.revalidatePostsDetail({ id: post._id });
       await APIService.revalidatePosts();
@@ -97,7 +90,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         <input className='h-10 text-md border-2 p-2' placeholder="카테고리" value={category} onChange={(e) => {
           setCategory(e.target.value);
         }} />
-        <Editor editorRef={editorRefCallback} />
+        <Editor editorRef={editorRef} initialValue={post.content} />
         <input className='h-10 text-md border-2 p-2' placeholder="태그: 공백으로 구분" value={tags} onChange={(e) => {
           setTags(e.target.value);
         }} />
