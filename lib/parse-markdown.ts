@@ -5,13 +5,15 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import typescript from 'highlight.js/lib/languages/typescript';
 import css from 'highlight.js/lib/languages/css';
 import json from 'highlight.js/lib/languages/json';
+import plaintext from 'highlight.js/lib/languages/plaintext';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);
 hljs.registerLanguage('css', css);
 hljs.registerLanguage('json', json);
+hljs.registerLanguage('plaintext', plaintext);
 
-const renderer = {
+export const renderer = {
   link(href: string, title: string, text: string) {
     return `<a class="hover:text-blue-400" target="_blank" href="${href}" title="${title || ''}">${text}</a>`;
   },
