@@ -2,7 +2,7 @@ type AboutProps = {
   content: string,
 };
 
-const env = process.env.VERCEL;
+const env = process.env.VERCEL_ENV;
 
 const About = ({ content }: AboutProps) => {
   console.log(env);
