@@ -16,7 +16,9 @@ async function dbConnect() {
   }
 
   try {
-    const db = await mongoose.connect(process.env.MONGODB_URI, { dbName: '42_blog' });
+    const db = await mongoose.connect(process.env.MONGODB_URI, {
+      dbName: process.env.VERCEL_ENV === 'production' ? '42_blog' : '42_blog_development',
+    });
     connection.isConnected = db.connections[0].readyState;
   } catch (error) {
     throw error;
