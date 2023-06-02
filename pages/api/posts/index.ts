@@ -9,7 +9,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   await dbConnect();
 
   if (method === 'POST') {
-    const result = await Posts.create(req.body);
+    const result = await Posts.create(123);
 
     res.status(200).json(result);
   }
@@ -25,10 +25,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (method === 'DELETE') {
     await Posts.deleteOne({ _id: new ObjectId(req.body._id) });
 
-    // if (deletedCount === 1)
     res.status(200).end();
-    // TODO - 삭제 제대로 안 됐을 때 에러 처리
   }
 
-  // TODO - 수정 API
+  // TODO - 삭제 제대로 안 됐을 때 에러 처리
 }
