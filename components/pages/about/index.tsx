@@ -2,7 +2,10 @@ type AboutProps = {
   content: string,
 };
 
+const env = process.env.VERCEL;
+
 const About = ({ content }: AboutProps) => {
+  console.log(env);
   return (
     <div className="prose prose-sm prose-p:my-1 prose-hr:my-5 prose-ul:my-1" dangerouslySetInnerHTML={{ __html: content }} />
   );
