@@ -2,8 +2,9 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongodb';
 import dbConnect from '@/lib/mongoose';
 import Comments from '@/models/Comments';
+import { withErrorHandler } from '@/lib/server-error-handler';
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
   await dbConnect();
@@ -33,8 +34,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (method === 'DELETE') {
     await Comments.deleteOne({ _id: new ObjectId(req.body._id) });
 
-    // if (deletedCount === 1)
     res.status(200).end();
-    // TODO - 삭제 제대로 안 됐을 때 에러 처리
   }
 }
+
+export default withErrorHandler(handler);

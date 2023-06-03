@@ -32,7 +32,7 @@ const CommentCard = ({
 }: CommentCardProps) => {
   const [ content, setContent ] = useState(initialContent);
   const [ isEditMode, setIsEditMode ] = useState(false);
-  const { showDialog } = useDialog();
+  const { showDialog, showErrorDialog } = useDialog();
 
   const isMyComment = useMemo(() => user?.id === authorId, [ user, authorId ]);
   const isMyLike = useMemo(() => likes.some((like) => like.authorId === user?.id), [ likes, user ]);
@@ -49,6 +49,7 @@ const CommentCard = ({
       });
       return;
     }
+
     try {
       await APIService.updateComments({
         _id,
@@ -64,7 +65,7 @@ const CommentCard = ({
         },
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 
@@ -77,7 +78,7 @@ const CommentCard = ({
         onConfirm: onRefetch,
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 
@@ -96,7 +97,7 @@ const CommentCard = ({
       await APIService.likeComments({ _id, likes: nextLikes });
       onRefetch();
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 

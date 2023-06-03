@@ -13,7 +13,7 @@ type PostPageProps = {
 const PostPage = ({ post }: PostPageProps) => {
   const router = useRouter();
   const user = useUser();
-  const { showDialog } = useDialog();
+  const { showDialog, showErrorDialog } = useDialog();
 
   const handleDelete = async () => {
     try {
@@ -25,7 +25,7 @@ const PostPage = ({ post }: PostPageProps) => {
         onConfirm: () => router.push('/posts'),
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 

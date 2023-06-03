@@ -25,7 +25,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
   const [ category, setCategory ] = useState(post.category);
   const [ tags, setTags ] = useState(post.tags.join(' '));
   const editorRef = useRef<EasyMDE | null>(null);
-  const { showDialog } = useDialog();
+  const { showDialog, showErrorDialog } = useDialog();
   const user = useUser();
 
   const handleDelete = async () => {
@@ -38,7 +38,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         onConfirm: () => router.push('/posts'),
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 
@@ -62,7 +62,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         onConfirm: onSubmit,
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 

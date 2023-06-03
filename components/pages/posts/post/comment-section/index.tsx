@@ -15,7 +15,7 @@ type CommentSectionProps = {
 
 const CommentSection = ({ postId }: CommentSectionProps) => {
   const user = useUser();
-  const { showDialog } = useDialog();
+  const { showDialog, showErrorDialog } = useDialog();
 
   const [ commentList, setCommentList ] = useState<Comment[]>([]);
 
@@ -24,7 +24,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
       const result = await APIService.getComments(postId);
       setCommentList(result);
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 
@@ -46,7 +46,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         onConfirm: refetchComment,
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 
@@ -56,11 +56,12 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         const result = await APIService.getComments(postId);
         setCommentList(result);
       } catch (error) {
-        throw error;
+        showErrorDialog(error);
       }
     };
+
     initComment();
-  }, [ postId ]);
+  }, [ postId, showErrorDialog ]);
 
   return (
     <section className='my-5 py-10 border-t-2'>

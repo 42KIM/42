@@ -1,6 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { withErrorHandler } from '@/lib/server-error-handler';
 
-export default function handler(req: NextApiRequest, res: NextApiResponse) {
+function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
   if (method === 'GET') {
@@ -11,3 +12,5 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).end();
   }
 }
+
+export default withErrorHandler(handler);

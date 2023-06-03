@@ -16,7 +16,7 @@ const CreatePost = () => {
   const [ category, setCategory ] = useState('');
   const [ tags, setTags ] = useState('');
   const editorRef = useRef<EasyMDE>(null);
-  const { showDialog } = useDialog();
+  const { showDialog, showErrorDialog } = useDialog();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ const CreatePost = () => {
         content: '게시물이 작성되었습니다.',
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 
