@@ -54,17 +54,17 @@ const Dialog = ({
     setDialog(null);
   };
 
-  const color = type === 'error' ? 'red' : 'sky';
+  const isError = type === 'error';
 
   return (
     <DialogBackground onBackgroundClick={onBackgroundClick} >
-      <div className={`bg-${color}-50 z-50 w-80 border-2 border-${color}-100 flex flex-col gap-1 shadow-lg border`}
+      <div className={`${isError ? 'bg-red-50 border-red-100' : 'bg-sky-50 border-sky-100'} z-50 w-80 border-2 flex flex-col gap-1 shadow-lg`}
         onClick={(e) => {
           e.stopPropagation();
         }}
       >
-        <div className={`flex justify-between p-1 text-xs bg-${color}-100`}>
-          <span className={`text-${color}-500`}>{title}</span>
+        <div className={`flex justify-between p-1 text-xs ${isError ? 'bg-red-100' : 'bg-sky-100'}`}>
+          <span className={isError ? 'text-red-500' : 'text-sky-500'}>{title}</span>
           <button
             className='text-neutral-500 opacity-50 hover:opacity-100'
             onClick={() => {
@@ -75,7 +75,7 @@ const Dialog = ({
         <div className='px-1 my-4 text-md text-center'>{content}</div>
         <div className='self-end flex gap-3 p-1'>
           <button
-            className={`text-xs font-medium text-${color}-500 opacity-50 hover:opacity-100`}
+            className={`text-xs font-medium ${isError ? 'text-red-500' : 'text-sky-500'} opacity-50 hover:opacity-100`}
             onClick={() => {
               onConfirm?.();
               closeDialog();
