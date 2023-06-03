@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PostContent from './Content';
 import { useDialog } from '@/lib/use-dialog';
+import { useErrorDialog } from '@/lib/use-error-dialog';
 
 type PostPageProps = {
   post: Post,
@@ -14,6 +15,7 @@ const PostPage = ({ post }: PostPageProps) => {
   const router = useRouter();
   const user = useUser();
   const { showDialog } = useDialog();
+  const { showErrorDialog } = useErrorDialog();
 
   const handleDelete = async () => {
     try {
@@ -25,7 +27,7 @@ const PostPage = ({ post }: PostPageProps) => {
         onConfirm: () => router.push('/posts'),
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 

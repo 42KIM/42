@@ -4,6 +4,7 @@ import type { FormEvent } from 'react';
 import { useRef, useState } from 'react';
 import { useDialog } from '@/lib/use-dialog';
 import type EasyMDE from 'easymde';
+import { useErrorDialog } from '@/lib/use-error-dialog';
 
 const Editor = dynamic(
   () => import('@/components/common/Editor'),
@@ -17,6 +18,7 @@ const CreatePost = () => {
   const [ tags, setTags ] = useState('');
   const editorRef = useRef<EasyMDE>(null);
   const { showDialog } = useDialog();
+  const { showErrorDialog } = useErrorDialog();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
@@ -35,7 +37,7 @@ const CreatePost = () => {
         content: '게시물이 작성되었습니다.',
       });
     } catch (error) {
-      throw error;
+      showErrorDialog(error);
     }
   };
 
