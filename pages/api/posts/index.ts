@@ -22,8 +22,9 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     res.status(200).end();
   }
 
+  // TODO - 유효하지 않은 id를 넣어도 에러가 발생하지 않는다.
   if (method === 'DELETE') {
-    await Posts.deleteOne({ _id: 1234 });
+    await Posts.deleteOne({ _id: new ObjectId(req.body._id) });
 
     res.status(200).end();
   }
