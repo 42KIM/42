@@ -8,7 +8,6 @@ import type { Comment } from '@/models/Comments';
 import CommentCard from './CommentCard';
 import CommentInput from './CommentInput';
 import { useDialog } from '@/lib/use-dialog';
-import { useErrorDialog } from '@/lib/use-error-dialog';
 
 type CommentSectionProps = {
   postId: string,
@@ -16,8 +15,7 @@ type CommentSectionProps = {
 
 const CommentSection = ({ postId }: CommentSectionProps) => {
   const user = useUser();
-  const { showDialog } = useDialog();
-  const { showErrorDialog } = useErrorDialog();
+  const { showDialog, showErrorDialog } = useDialog();
 
   const [ commentList, setCommentList ] = useState<Comment[]>([]);
 

@@ -1,6 +1,6 @@
 import { APIService } from '@/apis';
 import { accessCookieAtom, parseAccessCookie } from '@/lib/access-cookie';
-import { useErrorDialog } from '@/lib/use-error-dialog';
+import { useDialog } from '@/lib/use-dialog';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
@@ -10,7 +10,7 @@ const isValidPath = (state: string | string[] | undefined): state is string => t
 const AuthCallback = () => {
   const { push, query } = useRouter();
   const setAccessCookie = useSetRecoilState(accessCookieAtom);
-  const { showErrorDialog } = useErrorDialog();
+  const { showErrorDialog } = useDialog();
 
   useEffect(() => {
     if (!query.code) return;

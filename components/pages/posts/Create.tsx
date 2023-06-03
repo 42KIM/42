@@ -4,7 +4,6 @@ import type { FormEvent } from 'react';
 import { useRef, useState } from 'react';
 import { useDialog } from '@/lib/use-dialog';
 import type EasyMDE from 'easymde';
-import { useErrorDialog } from '@/lib/use-error-dialog';
 
 const Editor = dynamic(
   () => import('@/components/common/Editor'),
@@ -17,8 +16,7 @@ const CreatePost = () => {
   const [ category, setCategory ] = useState('');
   const [ tags, setTags ] = useState('');
   const editorRef = useRef<EasyMDE>(null);
-  const { showDialog } = useDialog();
-  const { showErrorDialog } = useErrorDialog();
+  const { showDialog, showErrorDialog } = useDialog();
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();

@@ -3,7 +3,6 @@ import Avatar from '@/components/common/Avatar';
 import type { User } from '@/lib/auth.service';
 import { formatDate } from '@/lib/format-date';
 import { useDialog } from '@/lib/use-dialog';
-import { useErrorDialog } from '@/lib/use-error-dialog';
 import type { Comment } from '@/models/Comments';
 import { useMemo, useState } from 'react';
 
@@ -33,8 +32,7 @@ const CommentCard = ({
 }: CommentCardProps) => {
   const [ content, setContent ] = useState(initialContent);
   const [ isEditMode, setIsEditMode ] = useState(false);
-  const { showDialog } = useDialog();
-  const { showErrorDialog } = useErrorDialog();
+  const { showDialog, showErrorDialog } = useDialog();
 
   const isMyComment = useMemo(() => user?.id === authorId, [ user, authorId ]);
   const isMyLike = useMemo(() => likes.some((like) => like.authorId === user?.id), [ likes, user ]);

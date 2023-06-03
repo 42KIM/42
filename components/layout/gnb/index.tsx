@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useSetRecoilState } from 'recoil';
 import githubLogo from '@/public/github-mark-white.svg';
 import GithubLoginButton from '@/components/common/GithubLoginButton';
-import { useErrorDialog } from '@/lib/use-error-dialog';
+import { useDialog } from '@/lib/use-dialog';
 
 type Menu = {
   name: string,
@@ -41,7 +41,7 @@ const Gnb = () => {
   const user = useUser();
   const isSignedIn = useIsSignedIn();
   const setAccessCookie = useSetRecoilState(accessCookieAtom);
-  const { showErrorDialog } = useErrorDialog();
+  const { showErrorDialog } = useDialog();
 
   const handleSignOut = async () => {
     try {

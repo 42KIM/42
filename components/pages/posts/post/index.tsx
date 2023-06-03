@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import PostContent from './Content';
 import { useDialog } from '@/lib/use-dialog';
-import { useErrorDialog } from '@/lib/use-error-dialog';
 
 type PostPageProps = {
   post: Post,
@@ -14,8 +13,7 @@ type PostPageProps = {
 const PostPage = ({ post }: PostPageProps) => {
   const router = useRouter();
   const user = useUser();
-  const { showDialog } = useDialog();
-  const { showErrorDialog } = useErrorDialog();
+  const { showDialog, showErrorDialog } = useDialog();
 
   const handleDelete = async () => {
     try {

@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useUser } from '@/lib/auth.service';
 import type EasyMDE from 'easymde';
-import { useErrorDialog } from '@/lib/use-error-dialog';
 
 type PostEditProps = {
   post: Post,
@@ -26,8 +25,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
   const [ category, setCategory ] = useState(post.category);
   const [ tags, setTags ] = useState(post.tags.join(' '));
   const editorRef = useRef<EasyMDE | null>(null);
-  const { showDialog } = useDialog();
-  const { showErrorDialog } = useErrorDialog();
+  const { showDialog, showErrorDialog } = useDialog();
   const user = useUser();
 
   const handleDelete = async () => {
