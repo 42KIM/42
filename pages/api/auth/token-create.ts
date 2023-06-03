@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { axiosInstance as _request } from '@/lib/axios';
+import { withErrorHandler } from '@/lib/server-error-handler';
 
 const CLIENT_ID = process.env.NODE_ENV === 'development' && process.env.GITHUB_CLIENT_ID_DEVELOPMENT ||
   process.env.NODE_ENV === 'production' && process.env.GITHUB_CLIENT_ID_PRODUCTION;
@@ -7,7 +8,7 @@ const CLIENT_ID = process.env.NODE_ENV === 'development' && process.env.GITHUB_C
 const CLIENT_SECRET = process.env.NODE_ENV === 'development' && process.env.GITHUB_CLIENT_SECRET_DEVELOPMENT ||
   process.env.NODE_ENV === 'production' && process.env.GITHUB_CLIENT_SECRET_PRODUCTION;
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
 
   if (method === 'POST') {
@@ -30,3 +31,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(200).end();
   }
 }
+
+export default withErrorHandler(handler);
