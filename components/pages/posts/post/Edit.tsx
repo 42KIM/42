@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import type { MouseEvent } from 'react';
 import { useRef, useState } from 'react';
 import type { Post } from '@/models/Posts';
 import { APIService } from '@/apis';
@@ -42,7 +43,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
     }
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: MouseEvent) => {
     event.preventDefault();
 
     try {
