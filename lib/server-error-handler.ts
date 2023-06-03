@@ -1,8 +1,8 @@
 import { AxiosError } from 'axios';
 import mongoose from 'mongoose';
-import type { NextApiResponse } from 'next';
+import type { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
-export const serverErrorHandler = (error: unknown, res: NextApiResponse) => {
+const serverErrorHandler = (error: unknown, res: NextApiResponse) => {
   if (!(error instanceof Error)) {
     throw error;
   }
@@ -24,4 +24,12 @@ export const serverErrorHandler = (error: unknown, res: NextApiResponse) => {
   res.status(500).json({
     message: error.message,
   });
+};
+
+export const withErrorHandler = (handler: NextApiHandler) => async (req: NextApiRequest, res: NextApiResponse) => {
+  try {
+    await handler(req, res);
+  } catch (error) {
+    serverErrorHandler(error, res);
+  }
 };
