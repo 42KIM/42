@@ -39,6 +39,7 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         authorId: user.id,
         authorAvatar: user.avatar_url,
         authorUrl: user.html_url,
+        likes: [],
       });
       showDialog({
         title: '완료',

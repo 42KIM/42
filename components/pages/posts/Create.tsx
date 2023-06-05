@@ -26,7 +26,7 @@ const CreatePost = () => {
         title,
         date,
         category,
-        content: editorRef.current?.value(),
+        content: editorRef.current?.value() || '',
         tags: tags.length > 0 ? tags.trim().split(' ') : [],
       });
       await APIService.revalidatePosts();
