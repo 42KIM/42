@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useSetRecoilState } from 'recoil';
 
-const isValidPath = (state: string | string[] | undefined): state is string => typeof state === 'string';
+const isValidString = (state: string | string[] | undefined): state is string => typeof state === 'string';
 
 const AuthCallback = () => {
   const { push, query } = useRouter();
@@ -16,13 +16,15 @@ const AuthCallback = () => {
     if (!query.code) return;
 
     const login = async () => {
+      if (!isValidString(query.code)) return;
+
       await APIService.createToken({ code: query.code });
 
       const accessCookie = parseAccessCookie();
       const redirectPath = query.state || '/';
 
       setAccessCookie(accessCookie);
-      push(isValidPath(redirectPath) ? redirectPath : '/');
+      push(isValidString(redirectPath) ? redirectPath : '/');
     };
 
     try {
