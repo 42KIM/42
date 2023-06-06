@@ -18,5 +18,9 @@ const CommentsSchema = new Schema({
 });
 
 export type Comment = InferSchemaType<typeof CommentsSchema> & { _id: string };
+export type CommentCreateRequest = Omit<Comment, '_id' | 'createdAt' | 'updatedAt'>;
+export type CommentUpdateRequest = Partial<CommentCreateRequest> & { _id: string };
+export type CommentDeleteRequest = Pick<Comment, '_id'>;
+export type CommentLikeRequest = Pick<Comment, '_id'> & { likes: Array<string> };
 
 export default mongoose.models.Comments || mongoose.model('Comments', CommentsSchema);
