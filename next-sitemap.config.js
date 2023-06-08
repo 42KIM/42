@@ -22,6 +22,7 @@ module.exports = {
     policies: [
       {
         userAgent: '*',
+        allow: '/',
         disallow: privateRoutes,
       }
     ],
