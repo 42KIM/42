@@ -17,6 +17,9 @@ export const renderer = {
   link(href: string, title: string, text: string) {
     return `<a class="hover:text-blue-400" target="_blank" href="${href}" title="${title || ''}">${text}</a>`;
   },
+  codespan(code: string) {
+    return `<code class="bg-gray-200 text-gray-800 rounded-md px-1 py-0.5">${code}</code>`;
+  },
 };
 
 marked.use({
