@@ -2,6 +2,7 @@ import type { Post } from '@/models/Posts';
 import Head from 'next/head';
 import CommentSection from './comment-section';
 import Viewer from '@/components/common/Viewer';
+import Likes from './Likes';
 
 type PostDetailProps = {
   post: Post,
@@ -26,6 +27,7 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
           <span className='text-xs'>{date}</span>
         </div>
         <Viewer html={content} />
+        <Likes postId={_id} />
         <div className='flex flex-col items-center mt-10'>
           <div className='w-1/3 h-0 border-t-2 border-dotted pt-6' />
           <p className='text-xs text-neutral-400 text-center italic '>

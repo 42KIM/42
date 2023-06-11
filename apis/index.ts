@@ -1,5 +1,6 @@
 import { axiosInstance as _request } from '@/lib/axios';
 import type { CommentCreateRequest, CommentDeleteRequest, CommentUpdateRequest, CommentLikeRequest } from '@/models/Comments';
+import type { Likes, PostsLikeRequest } from '@/models/Likes';
 import type { PostCreateRequest, PostDeleteRequest, PostUpdateRequest } from '@/models/Posts';
 
 export const APIService = {
@@ -34,6 +35,24 @@ export const APIService = {
     await _request({
       method: 'POST',
       url: '/api/revalidate/posts/detail',
+      data: payload,
+    });
+  },
+  getPostLikes: async (payload: string) => {
+    const { data } = await _request({
+      method: 'GET',
+      url: '/api/posts/likes',
+      params: {
+        postId: payload,
+      },
+    });
+
+    return data as Likes;
+  },
+  likePosts: async (payload: PostsLikeRequest) => {
+    await _request({
+      method: 'PUT',
+      url: '/api/posts/likes',
       data: payload,
     });
   },
