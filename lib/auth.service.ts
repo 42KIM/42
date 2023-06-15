@@ -12,11 +12,6 @@ export type User = {
   isAdmin: boolean,
 };
 
-export const isSignedInAtom = atom<boolean>({
-  key: 'isSignedIn',
-  default: false,
-});
-
 export const userAtom = atom<User | null>({
   key: 'user',
   default: null,
