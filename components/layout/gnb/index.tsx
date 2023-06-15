@@ -1,9 +1,8 @@
 import { APIService } from '@/apis';
-import { accessCookieAtom } from '@/lib/access-cookie';
-import { useIsSignedIn, useUser } from '@/lib/auth.service';
+import { useIsSignedIn, useUser, userAtom } from '@/lib/auth.service';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useSetRecoilState } from 'recoil';
+import { useResetRecoilState } from 'recoil';
 import githubLogo from '@/public/github-mark-white.svg';
 import GithubLoginButton from '@/components/common/GithubLoginButton';
 import { useDialog } from '@/lib/use-dialog';
@@ -40,13 +39,13 @@ export const menus: Menu[] = [
 const Gnb = () => {
   const user = useUser();
   const isSignedIn = useIsSignedIn();
-  const setAccessCookie = useSetRecoilState(accessCookieAtom);
+  const resetUser = useResetRecoilState(userAtom);
   const { showErrorDialog } = useDialog();
 
   const handleSignOut = async () => {
     try {
       await APIService.signOut();
-      setAccessCookie(null);
+      resetUser();
     } catch (error) {
       showErrorDialog(error);
     }

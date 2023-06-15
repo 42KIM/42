@@ -1,15 +1,12 @@
 import { APIService } from '@/apis';
-import { accessCookieAtom, parseAccessCookie } from '@/lib/access-cookie';
 import { useDialog } from '@/lib/use-dialog';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { useSetRecoilState } from 'recoil';
 
 const isValidString = (state: string | string[] | undefined): state is string => typeof state === 'string';
 
 const AuthCallback = () => {
   const { push, query } = useRouter();
-  const setAccessCookie = useSetRecoilState(accessCookieAtom);
   const { showErrorDialog } = useDialog();
 
   useEffect(() => {
@@ -20,10 +17,7 @@ const AuthCallback = () => {
 
       await APIService.createToken({ code: query.code });
 
-      const accessCookie = parseAccessCookie();
       const redirectPath = query.state || '/';
-
-      setAccessCookie(accessCookie);
       push(isValidString(redirectPath) ? redirectPath : '/');
     };
 
@@ -32,7 +26,7 @@ const AuthCallback = () => {
     } catch (error) {
       showErrorDialog(error);
     }
-  }, [ query, push, setAccessCookie, showErrorDialog ]);
+  }, [ query, push, showErrorDialog ]);
 
   return <div>Authentication Processing...</div>;
 };
