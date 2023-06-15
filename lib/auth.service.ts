@@ -1,6 +1,6 @@
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 import { parseAccessCookie } from './access-cookie';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { APIService } from '@/apis';
 import { useDialog } from './use-dialog';
 
@@ -19,16 +19,7 @@ export const userAtom = atom<User | null>({
 
 export const useUser = () => useRecoilValue<User | null>(userAtom);
 
-export const useIsSignedIn = () => {
-  const [ isSignedIn, setIsSignedIn ] = useState(false);
-  const user = useRecoilValue(userAtom);
-
-  useEffect(() => {
-    setIsSignedIn(user !== null);
-  }, [ user ]);
-
-  return isSignedIn;
-};
+export const useIsSignedIn = () => Boolean(useRecoilValue(userAtom));
 
 export const useAuthentication = () => {
   const parsedAccessCookie = parseAccessCookie();
