@@ -1,5 +1,5 @@
-import { atom, useRecoilState, useRecoilValue } from 'recoil';
-import { accessCookieAtom, parseAccessCookie } from './access-cookie';
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
+import { parseAccessCookie } from './access-cookie';
 import { useEffect, useState } from 'react';
 import { APIService } from '@/apis';
 import { useDialog } from './use-dialog';
@@ -37,19 +37,11 @@ export const useIsSignedIn = () => {
 
 export const useAuthentication = () => {
   const parsedAccessCookie = parseAccessCookie();
-  const [ accessCookie, setAccessCookie ] = useRecoilState(accessCookieAtom);
-  const [ user, setUser ] = useRecoilState(userAtom);
+  const setUser = useSetRecoilState(userAtom);
   const { showErrorDialog } = useDialog();
 
-  // TODO - 중복호출 이유 확인
   useEffect(() => {
-    if (parsedAccessCookie === null) {
-      user && setUser(null);
-      return;
-    }
-    if (user && (parsedAccessCookie === accessCookie)) return;
-
-    setAccessCookie(parsedAccessCookie);
+    if (parsedAccessCookie === null) return;
 
     const initUser = async () => {
       try {
@@ -61,12 +53,5 @@ export const useAuthentication = () => {
     };
 
     initUser();
-  }, [
-    parsedAccessCookie,
-    accessCookie,
-    user,
-    setUser,
-    setAccessCookie,
-    showErrorDialog,
-  ]);
+  }, [ parsedAccessCookie, setUser, showErrorDialog ]);
 };
