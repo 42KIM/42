@@ -1,6 +1,6 @@
-import { atom, useRecoilState, useRecoilValue } from 'recoil';
-import { accessCookieAtom, parseAccessCookie } from './access-cookie';
-import { useEffect, useState } from 'react';
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
+import { parseAccessCookie } from './access-cookie';
+import { useEffect } from 'react';
 import { APIService } from '@/apis';
 import { useDialog } from './use-dialog';
 
@@ -12,11 +12,6 @@ export type User = {
   isAdmin: boolean,
 };
 
-export const isSignedInAtom = atom<boolean>({
-  key: 'isSignedIn',
-  default: false,
-});
-
 export const userAtom = atom<User | null>({
   key: 'user',
   default: null,
@@ -24,32 +19,15 @@ export const userAtom = atom<User | null>({
 
 export const useUser = () => useRecoilValue<User | null>(userAtom);
 
-export const useIsSignedIn = () => {
-  const [ isSignedIn, setIsSignedIn ] = useState(false);
-  const user = useRecoilValue(userAtom);
-
-  useEffect(() => {
-    setIsSignedIn(user !== null);
-  }, [ user ]);
-
-  return isSignedIn;
-};
+export const useIsSignedIn = () => Boolean(useRecoilValue(userAtom));
 
 export const useAuthentication = () => {
   const parsedAccessCookie = parseAccessCookie();
-  const [ accessCookie, setAccessCookie ] = useRecoilState(accessCookieAtom);
-  const [ user, setUser ] = useRecoilState(userAtom);
+  const setUser = useSetRecoilState(userAtom);
   const { showErrorDialog } = useDialog();
 
-  // TODO - 중복호출 이유 확인
   useEffect(() => {
-    if (parsedAccessCookie === null) {
-      user && setUser(null);
-      return;
-    }
-    if (user && (parsedAccessCookie === accessCookie)) return;
-
-    setAccessCookie(parsedAccessCookie);
+    if (parsedAccessCookie === null) return;
 
     const initUser = async () => {
       try {
@@ -61,12 +39,5 @@ export const useAuthentication = () => {
     };
 
     initUser();
-  }, [
-    parsedAccessCookie,
-    accessCookie,
-    user,
-    setUser,
-    setAccessCookie,
-    showErrorDialog,
-  ]);
+  }, [ parsedAccessCookie, setUser, showErrorDialog ]);
 };
