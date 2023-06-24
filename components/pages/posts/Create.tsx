@@ -13,6 +13,7 @@ const Editor = dynamic(
 const CreatePost = () => {
   const [ title, setTitle ] = useState('');
   const [ date, setDate ] = useState('');
+  const [ description, setDescription ] = useState('');
   const [ category, setCategory ] = useState('');
   const [ tags, setTags ] = useState('');
   const editorRef = useRef<EasyMDE>(null);
@@ -25,6 +26,7 @@ const CreatePost = () => {
       await APIService.createPosts({
         title,
         date,
+        description,
         category,
         content: editorRef.current?.value() || '',
         tags: tags.length > 0 ? tags.trim().split(' ') : [],
@@ -46,6 +48,9 @@ const CreatePost = () => {
       }} />
       <input className='w-3/12 border-2 p-2' type="date" onChange={(e) => {
         setDate(e.target.value);
+      }} />
+      <input className='h-10 text-md border-2 p-2' placeholder="요약" value={description} onChange={(e) => {
+        setDescription(e.target.value);
       }} />
       <input className='h-10 text-md border-2 p-2' placeholder="카테고리" value={category} onChange={(e) => {
         setCategory(e.target.value);

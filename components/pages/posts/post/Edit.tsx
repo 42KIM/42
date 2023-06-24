@@ -23,6 +23,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
   const router = useRouter();
   const [ title, setTitle ] = useState(post.title);
   const [ date, setDate ] = useState(post.date);
+  const [ description, setDescription ] = useState(post.description);
   const [ category, setCategory ] = useState(post.category);
   const [ tags, setTags ] = useState(post.tags.join(' '));
   const editorRef = useRef<EasyMDE | null>(null);
@@ -51,6 +52,7 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         _id: post._id,
         title,
         date,
+        description,
         category,
         tags: tags.length > 0 ? tags.trim().split(' ') : [],
         content: editorRef.current?.value(),
@@ -87,6 +89,9 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
         }} />
         <input className='w-3/12 border-2 p-2' type="date" value={date} onChange={(e) => {
           setDate(e.target.value);
+        }} />
+        <input className='h-10 text-md border-2 p-2' placeholder="요약" value={description} onChange={(e) => {
+          setDescription(e.target.value);
         }} />
         <input className='h-10 text-md border-2 p-2' placeholder="카테고리" value={category} onChange={(e) => {
           setCategory(e.target.value);
