@@ -4,6 +4,7 @@ import mongoose, { Schema } from 'mongoose';
 const PostsSchema = new Schema({
   title: { type: String, required: true },
   date: { type: String, required: true },
+  description: { type: String },
   content: { type: String, required: true },
   tags: [ String ],
   category: String,
