@@ -8,13 +8,14 @@ type PostDetailProps = {
   post: Post,
 };
 
-const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailProps) => {
+const PostDetail = ({ post: { _id, date, description, title, content, tags } }: PostDetailProps) => {
   return (
     <>
       <Head>
         <title>{`${title} - 42's blog`}</title>
+        <meta name='description' content={description} />
         <meta property='og:title' content={title} />
-        {/* TODO - post description meta tag */}
+        <meta property='og:description' content={description} />
       </Head>
       <div className='py-4'>
         <div className='flex flex-col items-center border-dashed border-2 border-x-0 mb-16 py-6'>
