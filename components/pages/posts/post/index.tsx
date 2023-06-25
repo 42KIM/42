@@ -43,21 +43,19 @@ const PostPage = ({ post }: PostPageProps) => {
         <meta property='og:title' content={post.title} />
         <meta property='og:description' content={post.description} />
       </Head>
-      <div id='here'>
-        <div className='flex justify-between text-sm text-blue-300'>
-          <Link href={'/posts'}>
-            <button>◀️ 목록</button>
-          </Link>
-          {user?.isAdmin && (
-            <div className='flex gap-4'><button onClick={() => {
-              router.push(`/posts/${post._id}/edit`);
-            }}>수정하기</button>
-            <button onClick={handleDelete}>삭제하기</button>
-            </div>
-          )}
-        </div>
-        <PostContent post={post} />
+      <div className='flex justify-between text-sm text-blue-300'>
+        <Link href={'/posts'}>
+          <button>◀️ 목록</button>
+        </Link>
+        {user?.isAdmin && (
+          <div className='flex gap-4'><button onClick={() => {
+            router.push(`/posts/${post._id}/edit`);
+          }}>수정하기</button>
+          <button onClick={handleDelete}>삭제하기</button>
+          </div>
+        )}
       </div>
+      <PostContent post={post} />
     </>
   );
 };
