@@ -3,11 +3,11 @@ import CommentSection from './comment-section';
 import Viewer from '@/components/common/Viewer';
 import Likes from './Likes';
 
-type PostDetailProps = {
+type PostContentProps = {
   post: Post,
 };
 
-const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailProps) => {
+const PostContent = ({ post: { _id, date, title, content, tags } }: PostContentProps) => {
   return (
     <>
       <div className='py-4'>
@@ -42,4 +42,4 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
   );
 };
 
-export default PostDetail;
+export default PostContent;
