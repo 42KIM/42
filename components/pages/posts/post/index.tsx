@@ -2,6 +2,7 @@ import { APIService } from '@/apis';
 import { useUser } from '@/lib/auth.service';
 import type { Post } from '@/models/Posts';
 import Link from 'next/link';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import PostContent from './Content';
 import { useDialog } from '@/lib/use-dialog';
@@ -35,21 +36,29 @@ const PostPage = ({ post }: PostPageProps) => {
   if (!post) return null;
 
   return (
-    <div>
-      <div className='flex justify-between text-sm text-blue-300'>
-        <Link href={'/posts'}>
-          <button>◀️ 목록</button>
-        </Link>
-        {user?.isAdmin && (
-          <div className='flex gap-4'><button onClick={() => {
-            router.push(`/posts/${post._id}/edit`);
-          }}>수정하기</button>
-          <button onClick={handleDelete}>삭제하기</button>
-          </div>
-        )}
+    <>
+      <Head>
+        <title>{`${post.title} - 42's blog`}</title>
+        <meta name='description' content={post.description} />
+        <meta property='og:title' content={post.title} />
+        <meta property='og:description' content={post.description} />
+      </Head>
+      <div id='here'>
+        <div className='flex justify-between text-sm text-blue-300'>
+          <Link href={'/posts'}>
+            <button>◀️ 목록</button>
+          </Link>
+          {user?.isAdmin && (
+            <div className='flex gap-4'><button onClick={() => {
+              router.push(`/posts/${post._id}/edit`);
+            }}>수정하기</button>
+            <button onClick={handleDelete}>삭제하기</button>
+            </div>
+          )}
+        </div>
+        <PostContent post={post} />
       </div>
-      <PostContent post={post} />
-    </div>
+    </>
   );
 };
 
