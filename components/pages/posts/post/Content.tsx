@@ -1,21 +1,15 @@
 import type { Post } from '@/models/Posts';
-import Head from 'next/head';
 import CommentSection from './comment-section';
 import Viewer from '@/components/common/Viewer';
 import Likes from './Likes';
 
-type PostDetailProps = {
+type PostContentProps = {
   post: Post,
 };
 
-const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailProps) => {
+const PostContent = ({ post: { _id, date, title, content, tags } }: PostContentProps) => {
   return (
     <>
-      <Head>
-        <title>{`${title} - 42's blog`}</title>
-        <meta property='og:title' content={title} />
-        {/* TODO - post description meta tag */}
-      </Head>
       <div className='py-4'>
         <div className='flex flex-col items-center border-dashed border-2 border-x-0 mb-16 py-6'>
           {tags.length > 0 && (
@@ -48,4 +42,4 @@ const PostDetail = ({ post: { _id, date, title, content, tags } }: PostDetailPro
   );
 };
 
-export default PostDetail;
+export default PostContent;

@@ -2,6 +2,7 @@ import { APIService } from '@/apis';
 import { useUser } from '@/lib/auth.service';
 import type { Post } from '@/models/Posts';
 import Link from 'next/link';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import PostContent from './Content';
 import { useDialog } from '@/lib/use-dialog';
@@ -35,7 +36,13 @@ const PostPage = ({ post }: PostPageProps) => {
   if (!post) return null;
 
   return (
-    <div>
+    <>
+      <Head>
+        <title>{`${post.title} - 42's blog`}</title>
+        <meta name='description' content={post.description} />
+        <meta property='og:title' content={post.title} />
+        <meta property='og:description' content={post.description} />
+      </Head>
       <div className='flex justify-between text-sm text-blue-300'>
         <Link href={'/posts'}>
           <button>◀️ 목록</button>
@@ -49,7 +56,7 @@ const PostPage = ({ post }: PostPageProps) => {
         )}
       </div>
       <PostContent post={post} />
-    </div>
+    </>
   );
 };
 
