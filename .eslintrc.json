@@ -27,6 +27,7 @@
     "function-call-argument-newline": ["error", "consistent"],
     "function-paren-newline": ["error", "multiline"],
     "indent": ["error", 2],
+    "jsx-quotes": ["error", "prefer-double"],
     "key-spacing": "error",
     "keyword-spacing": "error",
     "linebreak-style": ["error", "unix"],
@@ -35,7 +36,7 @@
     "no-trailing-spaces": "error",
     "no-whitespace-before-property": "error",
     "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
-    "object-property-newline": ["error", {"allowAllPropertiesOnSameLine": true}],
+    "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }],
     "quotes": ["error", "single"],
     "semi": "error",
     "rest-spread-spacing": "error",
@@ -52,7 +53,22 @@
     "template-curly-spacing": "error",
     
     // react
-    "react/react-in-jsx-scope": "off",
-    "react/destructuring-assignment": ["error", "always"]
+    "react/button-has-type": "warn",
+    "react/destructuring-assignment": ["error", "always"],
+    "react/hook-use-state": ["warn", { "allowDestructuredState": true }],
+    "react/jsx-boolean-value": ["warn", "never"],
+    "react/jsx-closing-bracket-location": ["warn", "tag-aligned"],
+    "react/jsx-closing-tag-location": "warn",
+    "react/jsx-curly-brace-presence": ["warn", "never"],
+    "react/jsx-curly-spacing": ["warn", "never"],
+    "react/jsx-equals-spacing": ["warn", "never"],
+    "react/jsx-filename-extension": ["warn", { "extensions": [".jsx", ".tsx"] }],
+    "react/jsx-first-prop-new-line": ["warn", "multiline"],
+    "react/jsx-max-props-per-line": ["warn", { "maximum":  { "single": 2, "multi": 1 } }],
+    "react/jsx-no-useless-fragment": ["warn"],
+    "react/jsx-pascal-case": "error",
+    "react/jsx-tag-spacing": "error",
+    "react/no-array-index-key": "error",
+    "react/react-in-jsx-scope": "off"
   }
 }
