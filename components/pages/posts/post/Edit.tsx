@@ -76,13 +76,14 @@ const PostEdit = ({ post, onSubmit }: PostEditProps) => {
           <button>◀️ 목록</button>
         </Link>
         {user?.isAdmin && (
-          <div className="flex gap-4"><button
-            onClick={() => {
-              router.push(`/posts/${post._id}/edit`);
-            }}
-          >수정하기
-          </button>
-          <button onClick={handleDelete}>삭제하기</button>
+          <div className="flex gap-4">
+            <button
+              onClick={() => {
+                router.push(`/posts/${post._id}/edit`);
+              }}
+            >수정하기
+            </button>
+            <button onClick={handleDelete}>삭제하기</button>
           </div>
         )}
       </div>

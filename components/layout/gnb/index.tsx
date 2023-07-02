@@ -79,11 +79,13 @@ const Gnb = () => {
               </GithubLoginButton>
             )
           }
-          {isSignedIn && <button
-            className="text-sm text-white hover:text-blue-500"
-            onClick={handleSignOut}
-          >로그아웃
-          </button>}
+          {isSignedIn && (
+            <button
+              className="text-sm text-white hover:text-blue-500"
+              onClick={handleSignOut}
+            >로그아웃
+            </button>
+          )}
         </div>
       </div>
     </header>

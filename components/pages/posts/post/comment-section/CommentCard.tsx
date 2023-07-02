@@ -128,11 +128,13 @@ const CommentCard = ({
               }}
             >{isEditMode ? '취소' : '수정'}
             </button>
-            {isEditMode && <button
-              className="text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer"
-              onClick={() => handleEditComment({ _id, content })}
-            >완료
-            </button>}
+            {isEditMode && (
+              <button
+                className="text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer"
+                onClick={() => handleEditComment({ _id, content })}
+              >완료
+              </button>
+            )}
             <button
               className="text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer"
               onClick={() => handleDeleteComment(_id)}

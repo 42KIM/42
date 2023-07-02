@@ -85,14 +85,16 @@ const Dialog = ({
             }}
           >OK
           </button>
-          {onCancel && <button
-            className="text-xs font-medium text-red-500 opacity-50 hover:opacity-100"
-            onClick={() => {
-              onCancel();
-              closeDialog();
-            }}
-          >CANCEL
-          </button>}
+          {onCancel && (
+            <button
+              className="text-xs font-medium text-red-500 opacity-50 hover:opacity-100"
+              onClick={() => {
+                onCancel();
+                closeDialog();
+              }}
+            >CANCEL
+            </button>
+          )}
         </div>
       </div>
     </DialogBackground>
