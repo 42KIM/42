@@ -65,25 +65,30 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
   }, [ postId, showErrorDialog ]);
 
   return (
-    <section className='my-5 py-10 border-t-2'>
+    <section className="my-5 py-10 border-t-2">
       {user
         ? <CommentInput
           userName={user.login}
           userAvatar={user.avatar_url}
-          onSubmit={handleCommentSubmit} />
+          onSubmit={handleCommentSubmit}
+        />
         : (
-          <div className='flex gap-2 justify-center items-center'>
+          <div className="flex gap-2 justify-center items-center">
             <span>댓글을 작성하려면 로그인이 필요합니다.</span>
             <GithubLoginButton>
-              <div className='flex items-center gap-1'>
-                <Image src={githubLogo} alt='github_logo' width={14} />
-                <span className='text-sm text-black hover:text-gray-500'>Login with Github</span>
+              <div className="flex items-center gap-1">
+                <Image
+                  src={githubLogo}
+                  alt="github_logo"
+                  width={14}
+                />
+                <span className="text-sm text-black hover:text-gray-500">Login with Github</span>
               </div>
             </GithubLoginButton>
           </div>
         )}
       {commentList.length > 0 && (
-        <div className='flex flex-col gap-4 mt-14'>
+        <div className="flex flex-col gap-4 mt-14">
           {commentList.map((comment) =>
             <CommentCard
               key={comment._id}

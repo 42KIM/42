@@ -39,18 +39,21 @@ const PostPage = ({ post }: PostPageProps) => {
     <>
       <Head>
         <title>{`${post.title} - 42's blog`}</title>
-        <meta name='description' content={post.description} />
-        <meta property='og:title' content={post.title} />
-        <meta property='og:description' content={post.description} />
+        <meta name="description" content={post.description} />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={post.description} />
       </Head>
-      <div className='flex justify-between text-sm text-blue-300'>
-        <Link href={'/posts'}>
+      <div className="flex justify-between text-sm text-blue-300">
+        <Link href="/posts">
           <button>◀️ 목록</button>
         </Link>
         {user?.isAdmin && (
-          <div className='flex gap-4'><button onClick={() => {
-            router.push(`/posts/${post._id}/edit`);
-          }}>수정하기</button>
+          <div className="flex gap-4"><button
+            onClick={() => {
+              router.push(`/posts/${post._id}/edit`);
+            }}
+          >수정하기
+          </button>
           <button onClick={handleDelete}>삭제하기</button>
           </div>
         )}
