@@ -10,6 +10,11 @@
     eslint-import-resolver-alias "^1.1.2"
     eslint-plugin-import "^2.27.5"
 
+"@42kim/eslint-config-react@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@42kim/eslint-config-react/-/eslint-config-react-0.0.1.tgz#da5c3494ddd91c09d44d0bad859429b1df4b0775"
+  integrity sha512-XGEWt2gAZa+siWRj6aq0FNWrGwFjVQT0eYRKH1hrmNZoLr6gvw8IcddUK46kbYgVLjxbu/0ilNPn9Wa9rn0ddg==
+
 "@42kim/eslint-config-typescript@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@42kim/eslint-config-typescript/-/eslint-config-typescript-0.3.1.tgz#c4a4e62dea052f0bce0a8bb1142a39ad20fff48d"
