@@ -2,9 +2,12 @@
   "extends": [
     "next/core-web-vitals",
     "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
     "plugin:@next/next/recommended",
     "@42kim/eslint-config-typescript"
   ],
+  "plugins": ["import"],
   "rules": {
     "no-unused-vars": "error",
     "eqeqeq": "error",
@@ -68,6 +71,23 @@
     "react/jsx-pascal-case": "error",
     "react/jsx-tag-spacing": "error",
     "react/no-array-index-key": "error",
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+
+    // import
+    "import/order": [
+      "error",
+      {
+        "alphabetize": { "order": "asc" },
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "index",
+          "sibling",
+          "object"
+        ]
+      }
+    ]
   }
 }
