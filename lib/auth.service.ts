@@ -1,7 +1,7 @@
-import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
-import { parseAccessCookie } from './access-cookie';
 import { useEffect } from 'react';
+import { atom, useRecoilValue, useSetRecoilState } from 'recoil';
 import { APIService } from '@/apis';
+import { parseAccessCookie } from './access-cookie';
 import { useDialog } from './use-dialog';
 
 export type User = {

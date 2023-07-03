@@ -1,8 +1,8 @@
+import { ObjectId } from 'mongodb';
 import { createPrivateGetServerSideProps } from '@/lib/create-private-get-server-side-props';
 import dbConnect from '@/lib/mongoose';
 import type { Post } from '@/models/Posts';
 import Posts from '@/models/Posts';
-import { ObjectId } from 'mongodb';
 
 export { default } from '@/components/pages/posts/post/Edit';
 

@@ -1,5 +1,5 @@
-import type { Post } from '@/models/Posts';
 import Link from 'next/link';
+import type { Post } from '@/models/Posts';
 
 type PostsProps = {
   posts: Array<Post>,

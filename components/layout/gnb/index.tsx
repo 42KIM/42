@@ -1,11 +1,11 @@
-import { APIService } from '@/apis';
-import { useIsSignedIn, useUser, userAtom } from '@/lib/auth.service';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useResetRecoilState } from 'recoil';
-import githubLogo from '@/public/github-mark-white.svg';
+import { APIService } from '@/apis';
 import GithubLoginButton from '@/components/common/GithubLoginButton';
+import { useIsSignedIn, useUser, userAtom } from '@/lib/auth.service';
 import { useDialog } from '@/lib/use-dialog';
+import githubLogo from '@/public/github-mark-white.svg';
 
 type Menu = {
   name: string,

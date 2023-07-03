@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import { APIService } from '@/apis';
 import { useUser } from '@/lib/auth.service';
 import { useDialog } from '@/lib/use-dialog';
 import { Likes } from '@/models/Likes';
-import { useEffect, useState } from 'react';
 
 type LikesProps = {
   postId: string,

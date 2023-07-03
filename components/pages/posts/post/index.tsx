@@ -1,11 +1,11 @@
+import Head from 'next/head';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { APIService } from '@/apis';
 import { useUser } from '@/lib/auth.service';
-import type { Post } from '@/models/Posts';
-import Link from 'next/link';
-import Head from 'next/head';
-import { useRouter } from 'next/router';
-import PostContent from './Content';
 import { useDialog } from '@/lib/use-dialog';
+import type { Post } from '@/models/Posts';
+import PostContent from './Content';
 
 type PostPageProps = {
   post: Post,

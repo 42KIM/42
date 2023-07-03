@@ -1,7 +1,7 @@
-import type { Post } from '@/models/Posts';
-import CommentSection from './comment-section';
 import Viewer from '@/components/common/Viewer';
+import type { Post } from '@/models/Posts';
 import Likes from './Likes';
+import CommentSection from './comment-section';
 
 type PostContentProps = {
   post: Post,

@@ -1,9 +1,9 @@
-import Layout from '@/components/layout';
-import '@/styles/globals.css';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
+import Layout from '@/components/layout';
+import '@/styles/globals.css';
 
 type PageComponentWithProps = NextPage & {
   getLayoutProps?: () => Parameters<typeof Layout>[0],

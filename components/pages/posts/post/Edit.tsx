@@ -1,13 +1,13 @@
+import type EasyMDE from 'easymde';
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import type { MouseEvent } from 'react';
 import { useRef, useState } from 'react';
-import type { Post } from '@/models/Posts';
 import { APIService } from '@/apis';
-import { useDialog } from '@/lib/use-dialog';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { useUser } from '@/lib/auth.service';
-import type EasyMDE from 'easymde';
+import { useDialog } from '@/lib/use-dialog';
+import type { Post } from '@/models/Posts';
 
 type PostEditProps = {
   post: Post,

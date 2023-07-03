@@ -1,13 +1,13 @@
-import { useUser } from '@/lib/auth.service';
 import Image from 'next/image';
-import githubLogo from '@/public/github-mark.svg';
 import { useEffect, useState } from 'react';
-import GithubLoginButton from '@/components/common/GithubLoginButton';
 import { APIService } from '@/apis';
+import GithubLoginButton from '@/components/common/GithubLoginButton';
+import { useUser } from '@/lib/auth.service';
+import { useDialog } from '@/lib/use-dialog';
 import type { Comment } from '@/models/Comments';
+import githubLogo from '@/public/github-mark.svg';
 import CommentCard from './CommentCard';
 import CommentInput from './CommentInput';
-import { useDialog } from '@/lib/use-dialog';
 
 type CommentSectionProps = {
   postId: string,

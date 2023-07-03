@@ -1,6 +1,6 @@
+import EasyMDE from 'easymde';
 import { memo } from 'react';
 import type { MutableRefObject } from 'react';
-import EasyMDE from 'easymde';
 import { parseMarkdownToHTML } from '@/lib/parse-markdown';
 import 'easymde/dist/easymde.min.css';
 

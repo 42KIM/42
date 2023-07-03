@@ -1,9 +1,9 @@
-import { APIService } from '@/apis';
+import type EasyMDE from 'easymde';
 import dynamic from 'next/dynamic';
 import type { FormEvent } from 'react';
 import { useRef, useState } from 'react';
+import { APIService } from '@/apis';
 import { useDialog } from '@/lib/use-dialog';
-import type EasyMDE from 'easymde';
 
 const Editor = dynamic(
   () => import('@/components/common/Editor'),
