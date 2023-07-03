@@ -18,8 +18,8 @@ const LikesSchema = new Schema<ILikes>({
   timestamps: true,
 });
 
-export type Likes = InferSchemaType<typeof LikesSchema>;
-export type PostsLikeRequest = Pick<Likes, 'postId' | 'authors'>;
+export type Like = InferSchemaType<typeof LikesSchema>;
+export type PostsLikeRequest = Pick<Like, 'postId' | 'authors'>;
 
 export default mongoose.models.Likes || mongoose.model('Likes', LikesSchema);
 // TODO - schema type 수정

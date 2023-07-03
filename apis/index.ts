@@ -1,6 +1,6 @@
 import { axiosInstance as _request } from '@/lib/axios';
 import type { CommentCreateRequest, CommentDeleteRequest, CommentUpdateRequest, CommentLikeRequest } from '@/models/Comments';
-import type { Likes, PostsLikeRequest } from '@/models/Likes';
+import type { Like, PostsLikeRequest } from '@/models/Likes';
 import type { PostCreateRequest, PostDeleteRequest, PostUpdateRequest } from '@/models/Posts';
 
 export const APIService = {
@@ -47,7 +47,7 @@ export const APIService = {
       },
     });
 
-    return data as Likes;
+    return data as Like;
   },
   likePosts: async (payload: PostsLikeRequest) => {
     await _request({

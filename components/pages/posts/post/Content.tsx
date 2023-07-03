@@ -1,6 +1,6 @@
 import Viewer from '@/components/common/Viewer';
 import type { Post } from '@/models/Posts';
-import Likes from './Likes';
+import PostLikes from './Likes';
 import CommentSection from './comment-section';
 
 type PostContentProps = {
@@ -21,7 +21,7 @@ const PostContent = ({ post: { _id, date, title, content, tags } }: PostContentP
           <span className="text-xs">{date}</span>
         </div>
         <Viewer html={content} />
-        <Likes postId={_id} />
+        <PostLikes postId={_id} />
         <div className="flex flex-col items-center mt-10">
           <div className="w-1/3 h-0 border-t-2 border-dotted pt-6" />
           <p className="text-xs text-neutral-400 text-center italic ">
