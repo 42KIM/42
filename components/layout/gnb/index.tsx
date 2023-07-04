@@ -1,11 +1,11 @@
-import { APIService } from '@/apis';
-import { useIsSignedIn, useUser, userAtom } from '@/lib/auth.service';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useResetRecoilState } from 'recoil';
-import githubLogo from '@/public/github-mark-white.svg';
+import { APIService } from '@/apis';
 import GithubLoginButton from '@/components/common/GithubLoginButton';
+import { useIsSignedIn, useUser, userAtom } from '@/lib/auth.service';
 import { useDialog } from '@/lib/use-dialog';
+import githubLogo from '@/public/github-mark-white.svg';
 
 type Menu = {
   name: string,
@@ -59,25 +59,33 @@ const Gnb = () => {
             if (!adminOnly || (adminOnly && user?.isAdmin)) {
               return (
                 <Link key={name} href={path}>
-                  <span className='text-white hover:text-blue-500'>{name}</span>
+                  <span className="text-white hover:text-blue-500">{name}</span>
                 </Link>
               );
             }
           })}
         </div>
-        <div className='flex items-center gap-2'>
-          <Image src={githubLogo} alt='login' width={18} />
+        <div className="flex items-center gap-2">
+          <Image
+            src={githubLogo}
+            alt="login"
+            width={18}
+          />
           {user
-            ? <span className='text-sm text-white'>{user.login}</span>
+            ? <span className="text-sm text-white">{user.login}</span>
             : (
               <GithubLoginButton>
-                <span className='text-sm text-white hover:text-blue-500'>Login with Github</span>
+                <span className="text-sm text-white hover:text-blue-500">Login with Github</span>
               </GithubLoginButton>
             )
           }
-          {isSignedIn && <button
-            className='text-sm text-white hover:text-blue-500'
-            onClick={handleSignOut}>로그아웃</button>}
+          {isSignedIn && (
+            <button
+              className="text-sm text-white hover:text-blue-500"
+              onClick={handleSignOut}
+            >로그아웃
+            </button>
+          )}
         </div>
       </div>
     </header>

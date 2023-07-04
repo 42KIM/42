@@ -1,11 +1,11 @@
-import { marked } from 'marked';
-import { markedHighlight } from 'marked-highlight';
 import hljs from 'highlight.js/lib/core';
-import javascript from 'highlight.js/lib/languages/javascript';
-import typescript from 'highlight.js/lib/languages/typescript';
 import css from 'highlight.js/lib/languages/css';
+import javascript from 'highlight.js/lib/languages/javascript';
 import json from 'highlight.js/lib/languages/json';
 import plaintext from 'highlight.js/lib/languages/plaintext';
+import typescript from 'highlight.js/lib/languages/typescript';
+import { marked } from 'marked';
+import { markedHighlight } from 'marked-highlight';
 
 hljs.registerLanguage('javascript', javascript);
 hljs.registerLanguage('typescript', typescript);

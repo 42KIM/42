@@ -1,6 +1,6 @@
 import { axiosInstance as _request } from '@/lib/axios';
 import type { CommentCreateRequest, CommentDeleteRequest, CommentUpdateRequest, CommentLikeRequest } from '@/models/Comments';
-import type { Likes, PostsLikeRequest } from '@/models/Likes';
+import type { Like, PostsLikeRequest } from '@/models/Likes';
 import type { PostCreateRequest, PostDeleteRequest, PostUpdateRequest } from '@/models/Posts';
 
 export const APIService = {
@@ -47,7 +47,7 @@ export const APIService = {
       },
     });
 
-    return data as Likes;
+    return data as Like;
   },
   likePosts: async (payload: PostsLikeRequest) => {
     await _request({
@@ -114,6 +114,13 @@ export const APIService = {
     await _request({
       method: 'GET',
       url: '/api/auth/sign-out',
+    });
+  },
+  createGithubIssue: async (payload: { title: string, body: string }) => {
+    await _request({
+      method: 'POST',
+      url: '/api/comments/github-issue',
+      data: payload,
     });
   },
 };

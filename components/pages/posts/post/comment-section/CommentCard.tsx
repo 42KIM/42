@@ -1,10 +1,10 @@
+import { useMemo, useState } from 'react';
 import { APIService } from '@/apis';
 import Avatar from '@/components/common/Avatar';
 import type { User } from '@/lib/auth.service';
 import { formatDate } from '@/lib/format-date';
 import { useDialog } from '@/lib/use-dialog';
 import type { Comment } from '@/models/Comments';
-import { useMemo, useState } from 'react';
 
 const unlikedStyle = 'w-fit py-1 px-2 text-xs border-2 border-neutral-300 rounded-2xl text-neutral-400 hover:cursor-pointer hover:border-rose-300 hover:text-rose-500';
 const likedStyled = 'w-fit py-1 px-2 text-xs border-2 border-rose-300 rounded-2xl text-rose-500 hover:cursor-pointer';
@@ -102,40 +102,51 @@ const CommentCard = ({
   };
 
   return (
-    <div className='flex flex-col gap-3 px-2 py-5'>
-      <div className='flex items-start gap-2'>
+    <div className="flex flex-col gap-3 px-2 py-5">
+      <div className="flex items-start gap-2">
         <Avatar
           src={authorAvatar}
           width={50}
         />
-        <div className='flex flex-col'>
-          <a href={authorUrl} target='_blank' rel="noreferrer">
-            <span className='text-lg hover:opacity-50 hover:cursor-pointer'>{author}</span>
+        <div className="flex flex-col">
+          <a
+            href={authorUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            <span className="text-lg hover:opacity-50 hover:cursor-pointer">{author}</span>
           </a>
-          <span className='text-sm text-gray-400'>{formatDate(createdAt)}</span>
+          <span className="text-sm text-gray-400">{formatDate(createdAt)}</span>
         </div>
         {isMyComment && (
-          <div className='flex gap-2 ml-auto'>
+          <div className="flex gap-2 ml-auto">
             <button
-              className='text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer'
+              className="text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer"
               onClick={() => {
                 setIsEditMode(!isEditMode);
                 setContent(initialContent);
-              }}>{isEditMode ? '취소' : '수정'}</button>
-            {isEditMode && <button
-              className='text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer'
-              onClick={() => handleEditComment({ _id, content })}>완료</button>}
+              }}
+            >{isEditMode ? '취소' : '수정'}
+            </button>
+            {isEditMode && (
+              <button
+                className="text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer"
+                onClick={() => handleEditComment({ _id, content })}
+              >완료
+              </button>
+            )}
             <button
-              className='text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer'
+              className="text-sm text-gray-400 hover:opacity-50 hover:cursor-pointer"
               onClick={() => handleDeleteComment(_id)}
-            >삭제</button>
+            >삭제
+            </button>
           </div>
         )}
       </div>
       {isEditMode
         ? (
           <textarea
-            className='border-2 rounded-md p-2 resize-none'
+            className="border-2 rounded-md p-2 resize-none"
             value={content}
             onChange={(e) => {
               setContent(e.target.value);
@@ -145,10 +156,10 @@ const CommentCard = ({
         : (
           <p>
             <span>{initialContent}</span>
-            {isEdited && <span className='ml-1 text-xs text-gray-400'>(수정됨)</span>}
+            {isEdited && <span className="ml-1 text-xs text-gray-400">(수정됨)</span>}
           </p>
         )}
-      <div className='flex items-center mt-3'>
+      <div className="flex items-center mt-3">
         <button
           className={isMyLike ? likedStyled : unlikedStyle}
           onClick={() => {
@@ -162,8 +173,9 @@ const CommentCard = ({
                 content: '좋아요를 누르려면 로그인이 필요합니다.',
               });
           }}
-        >좋아요 {likes?.length}</button>
-        {likes.length > 0 && <span className='ml-1 text-xs text-gray-400'>by {likedUsers}</span>}
+        >좋아요 {likes?.length}
+        </button>
+        {likes.length > 0 && <span className="ml-1 text-xs text-gray-400">by {likedUsers}</span>}
       </div>
     </div>
   );

@@ -1,9 +1,10 @@
 {
   "extends": [
     "next/core-web-vitals",
-    "plugin:react/recommended",
     "plugin:@next/next/recommended",
-    "@42kim/eslint-config-typescript"
+    "@42kim/eslint-config-typescript",
+    "@42kim/eslint-config-import",
+    "@42kim/eslint-config-react"
   ],
   "rules": {
     "no-unused-vars": "error",
@@ -27,6 +28,7 @@
     "function-call-argument-newline": ["error", "consistent"],
     "function-paren-newline": ["error", "multiline"],
     "indent": ["error", 2],
+    "jsx-quotes": ["error", "prefer-double"],
     "key-spacing": "error",
     "keyword-spacing": "error",
     "linebreak-style": ["error", "unix"],
@@ -35,7 +37,7 @@
     "no-trailing-spaces": "error",
     "no-whitespace-before-property": "error",
     "object-curly-newline": ["error", { "multiline": true, "consistent": true }],
-    "object-property-newline": ["error", {"allowAllPropertiesOnSameLine": true}],
+    "object-property-newline": ["error", { "allowAllPropertiesOnSameLine": true }],
     "quotes": ["error", "single"],
     "semi": "error",
     "rest-spread-spacing": "error",
@@ -49,10 +51,6 @@
     "space-in-parens": "error",
     "space-infix-ops": "error",
     "space-unary-ops": "error",
-    "template-curly-spacing": "error",
-    
-    // react
-    "react/react-in-jsx-scope": "off",
-    "react/destructuring-assignment": ["error", "always"]
+    "template-curly-spacing": "error"
   }
 }

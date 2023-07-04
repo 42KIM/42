@@ -1,19 +1,19 @@
+import { useEffect, useState } from 'react';
 import { APIService } from '@/apis';
 import { useUser } from '@/lib/auth.service';
 import { useDialog } from '@/lib/use-dialog';
-import { Likes } from '@/models/Likes';
-import { useEffect, useState } from 'react';
+import type { Like } from '@/models/Likes';
 
 type LikesProps = {
   postId: string,
 };
 
-type LikedAuthors = Likes['authors'];
+type LikedAuthors = Like['authors'];
 
 const unlikedStyle = 'border-blue-200 text-blue-200';
 const likedStyle = 'border-blue-500 text-blue-700';
 
-const Likes = ({ postId }: LikesProps) => {
+const PostLikes = ({ postId }: LikesProps) => {
   const [ liked, setLiked ] = useState(false);
   const [ likedUsers, setLikedUsers ] = useState<LikedAuthors>([]);
   const { showDialog, showErrorDialog } = useDialog();
@@ -67,4 +67,4 @@ const Likes = ({ postId }: LikesProps) => {
   );
 };
 
-export default Likes;
+export default PostLikes;

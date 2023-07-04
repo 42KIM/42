@@ -1,8 +1,8 @@
-import dbConnect from '@/lib/mongoose';
+import type { GetServerSideProps } from 'next';
 import { getServerSideSitemapLegacy } from 'next-sitemap';
+import dbConnect from '@/lib/mongoose';
 import type { Post } from '@/models/Posts';
 import Posts from '@/models/Posts';
-import type { GetServerSideProps } from 'next';
 
 const siteUrl = process.env.PRODUCTION_URL || 'https://42blog.vercel.app';
 

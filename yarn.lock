@@ -2,6 +2,19 @@
 # yarn lockfile v1
 
 
+"@42kim/eslint-config-import@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@42kim/eslint-config-import/-/eslint-config-import-0.0.1.tgz#6652441410038d764636ae0e47f2f3507d871ff9"
+  integrity sha512-/9jjK984ihAZMcmHukIRWv7RFsczR+uU7lI5pzZRG6Sxi3iyY9hRSsB+mHFUCl2TLf0Ns/kF3jSREevGN6VLtA==
+  dependencies:
+    eslint-import-resolver-alias "^1.1.2"
+    eslint-plugin-import "^2.27.5"
+
+"@42kim/eslint-config-react@^0.0.1":
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/@42kim/eslint-config-react/-/eslint-config-react-0.0.1.tgz#da5c3494ddd91c09d44d0bad859429b1df4b0775"
+  integrity sha512-XGEWt2gAZa+siWRj6aq0FNWrGwFjVQT0eYRKH1hrmNZoLr6gvw8IcddUK46kbYgVLjxbu/0ilNPn9Wa9rn0ddg==
+
 "@42kim/eslint-config-typescript@^0.3.1":
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/@42kim/eslint-config-typescript/-/eslint-config-typescript-0.3.1.tgz#c4a4e62dea052f0bce0a8bb1142a39ad20fff48d"
@@ -2013,6 +2026,11 @@ eslint-config-next@13.2.4:
     eslint-plugin-react "^7.31.7"
     eslint-plugin-react-hooks "^4.5.0"
 
+eslint-import-resolver-alias@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-alias/-/eslint-import-resolver-alias-1.1.2.tgz#297062890e31e4d6651eb5eba9534e1f6e68fc97"
+  integrity sha512-WdviM1Eu834zsfjHtcGHtGfcu+F30Od3V7I9Fi57uhBEwPkjDcii7/yW8jAT+gOhn4P/vOxxNAXbFAKsrrc15w==
+
 eslint-import-resolver-node@^0.3.6, eslint-import-resolver-node@^0.3.7:
   version "0.3.7"
   resolved "https://registry.yarnpkg.com/eslint-import-resolver-node/-/eslint-import-resolver-node-0.3.7.tgz#83b375187d412324a1963d84fa664377a23eb4d7"
@@ -2043,7 +2061,7 @@ eslint-module-utils@^2.7.4:
   dependencies:
     debug "^3.2.7"
 
-eslint-plugin-import@^2.26.0:
+eslint-plugin-import@^2.26.0, eslint-plugin-import@^2.27.5:
   version "2.27.5"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.27.5.tgz#876a6d03f52608a3e5bb439c2550588e51dd6c65"
   integrity sha512-LmEt3GVofgiGuiE+ORpnvP+kAm3h6MLZJ4Q5HCyHADofsb4VzXFsRiWj3c0OFiV+3DWFh0qg3v9gcPlfc3zRow==

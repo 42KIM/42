@@ -27,6 +27,8 @@
     "typescript": "5.0.3"
   },
   "devDependencies": {
+    "@42kim/eslint-config-import": "^0.0.1",
+    "@42kim/eslint-config-react": "^0.0.1",
     "@42kim/eslint-config-typescript": "^0.3.1",
     "@tailwindcss/typography": "^0.5.9",
     "@testing-library/jest-dom": "^5.16.5",

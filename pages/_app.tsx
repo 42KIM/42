@@ -1,9 +1,9 @@
-import Layout from '@/components/layout';
-import '@/styles/globals.css';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { RecoilRoot } from 'recoil';
+import Layout from '@/components/layout';
+import '@/styles/globals.css';
 
 type PageComponentWithProps = NextPage & {
   getLayoutProps?: () => Parameters<typeof Layout>[0],
@@ -34,11 +34,11 @@ export default function App({ Component, pageProps, router }: AppProps & { Compo
         <meta name="description" content={description} />
         {!hasOgTag &&
           <>
-            <meta property='og:title' content={title} />
-            <meta property='og:description' content={description} />
+            <meta property="og:title" content={title} />
+            <meta property="og:description" content={description} />
           </>
         }
-        <meta property='og:url' content={ogUrl.href} />
+        <meta property="og:url" content={ogUrl.href} />
         {/* TODO - add og:image */}
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="google-site-verification" content="dBgFFdRczNH_XqiqGXYjwDQIugMFrpfgrC1gm4R6WH8" />

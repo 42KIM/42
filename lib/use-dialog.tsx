@@ -1,8 +1,8 @@
-import type { DialogProps } from '@/components/common/Dialog';
-import { dialogAtom } from '@/components/common/Dialog';
 import { AxiosError } from 'axios';
 import { useCallback } from 'react';
 import { useSetRecoilState } from 'recoil';
+import { dialogAtom } from '@/components/common/Dialog';
+import type { DialogProps } from '@/components/common/Dialog';
 
 export const useDialog = () => {
   const setDialog = useSetRecoilState(dialogAtom);

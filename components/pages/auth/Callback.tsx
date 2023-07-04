@@ -1,7 +1,7 @@
-import { APIService } from '@/apis';
-import { useDialog } from '@/lib/use-dialog';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import { APIService } from '@/apis';
+import { useDialog } from '@/lib/use-dialog';
 
 const isValidString = (state: string | string[] | undefined): state is string => typeof state === 'string';
 

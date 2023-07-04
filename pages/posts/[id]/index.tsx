@@ -1,9 +1,9 @@
+import { ObjectId } from 'mongodb';
+import type { GetServerSidePropsContext } from 'next';
 import dbConnect from '@/lib/mongoose';
 import { parseMarkdownToHTML } from '@/lib/parse-markdown';
 import type { Post } from '@/models/Posts';
 import Posts from '@/models/Posts';
-import { ObjectId } from 'mongodb';
-import type { GetServerSidePropsContext } from 'next';
 
 export { default } from '@/components/pages/posts/post';
 

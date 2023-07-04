@@ -1,5 +1,5 @@
-import { parseMarkdownToHTML } from '@/lib/parse-markdown';
 import fs from 'fs/promises';
+import { parseMarkdownToHTML } from '@/lib/parse-markdown';
 
 export { default } from '@/components/pages/about';
 

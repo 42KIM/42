@@ -1,6 +1,6 @@
+import EasyMDE from 'easymde';
 import { memo } from 'react';
 import type { MutableRefObject } from 'react';
-import EasyMDE from 'easymde';
 import { parseMarkdownToHTML } from '@/lib/parse-markdown';
 import 'easymde/dist/easymde.min.css';
 
@@ -28,7 +28,7 @@ const Editor = ({ editorRef, initialValue = '' }: EditorProps) => {
   };
 
   return (
-    <div className='prose prose-sm max-w-none max-h-fit prose-p:my-1 prose-hr:my-5 prose-ul:my-1 prose-code:text-xs'>
+    <div className="prose prose-sm max-w-none max-h-fit prose-p:my-1 prose-hr:my-5 prose-ul:my-1 prose-code:text-xs">
       <textarea ref={callbackRef} />
     </div>
   );

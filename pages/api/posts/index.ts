@@ -1,8 +1,8 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
 import { ObjectId } from 'mongodb';
+import type { NextApiRequest, NextApiResponse } from 'next';
 import dbConnect from '@/lib/mongoose';
-import Posts from '@/models/Posts';
 import { withErrorHandler } from '@/lib/server-error-handler';
+import Posts from '@/models/Posts';
 
 async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;

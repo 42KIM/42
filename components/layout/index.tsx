@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from 'react';
-import Gnb from './gnb';
 import { useAuthentication } from '@/lib/auth.service';
 import DialogBaseComponent from '../common/Dialog';
+import Gnb from './gnb';
 
 type LayoutProps = {
   showGnb?: boolean,
