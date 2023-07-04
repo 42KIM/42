@@ -116,4 +116,11 @@ export const APIService = {
       url: '/api/auth/sign-out',
     });
   },
+  createGithubIssue: async (payload: { title: string, body: string }) => {
+    await _request({
+      method: 'POST',
+      url: '/api/comments/github-issue',
+      data: payload,
+    });
+  },
 };
