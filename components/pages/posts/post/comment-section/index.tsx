@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { APIService } from '@/apis';
 import GithubLoginButton from '@/components/common/GithubLoginButton';
 import { useUser } from '@/lib/auth.service';
+import { createGithubIssueTemplate } from '@/lib/create-issue-template';
 import { useDialog } from '@/lib/use-dialog';
 import type { Comment } from '@/models/Comments';
 import githubLogo from '@/public/github-mark.svg';
@@ -16,7 +17,6 @@ type CommentSectionProps = {
 const CommentSection = ({ postId }: CommentSectionProps) => {
   const user = useUser();
   const { showDialog, showErrorDialog } = useDialog();
-
   const [ commentList, setCommentList ] = useState<Comment[]>([]);
 
   const refetchComment = async () => {
@@ -41,11 +41,24 @@ const CommentSection = ({ postId }: CommentSectionProps) => {
         authorUrl: user.html_url,
         likes: [],
       });
+
       showDialog({
         title: '완료',
         content: '댓글이 등록되었습니다.',
         onConfirm: refetchComment,
       });
+
+      if (!user.isAdmin) {
+        APIService.createGithubIssue({
+          title: `${user.login}님이 댓글을 남겼습니다.`,
+          body: createGithubIssueTemplate({
+            postId,
+            author: user.login,
+            authorUrl: user.html_url,
+            content,
+          }),
+        });
+      }
     } catch (error) {
       showErrorDialog(error);
     }
